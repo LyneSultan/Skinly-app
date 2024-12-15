@@ -1,6 +1,9 @@
+import { StyleSheet } from 'react-native';
+import { colors } from './../../../colors/colors';
 
-export const styles ={
-    backgroundColor: '#A5BAB1',
+export const styles = StyleSheet.create({
+  button: {
+    backgroundColor: colors.secondary,
     borderRadius: 15,
-    color:"#000000"
-};
+  },
+});
