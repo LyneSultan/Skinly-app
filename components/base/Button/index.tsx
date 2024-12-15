@@ -1,17 +1,17 @@
 import { Button } from 'react-native-paper';
 import { styles } from './style';
 
-interface MyButtonProps {
-  mode: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
+interface buttonProps {
+  mode: 'text' | 'outlined' | 'contained';
   text: string;
 }
 
-const ButtonComponent = ({ mode, text }: MyButtonProps) => {
+const ButtonComponent = ({ mode, text }: buttonProps) => {
   return (
     <Button
       mode={mode}
       onPress={() => console.log('Pressed')}
-      style={[{ backgroundColor: styles.backgroundColor, borderRadius: styles.borderRadius }]}
+      style={styles.button}
     >
       {text}
     </Button >
