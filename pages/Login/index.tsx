@@ -1,0 +1,33 @@
+import ButtonComponent from "@/components/base/Button"
+import { Input } from "@/components/base/Input"
+import { base } from "@/style/base"
+import { Image, Text, View } from "react-native"
+import { style } from "./style"
+export const Login = () => {
+  return (
+    <View style={[style.container]}>
+      <Image source={require('./../../assets/images/backIcon.png')} />
+
+      <View>
+        <Text>Welcome back! Glad to see you, Again!</Text>
+      </View>
+
+      <View style={style.loginForm}>
+        <Input label="Name" text="Enter your name"></Input>
+        <Input label="password" text="Enter your password"></Input>
+      </View>
+
+      <View style={base.flex}>
+        <View style={style.forgetPassword}>
+          <Text>Forgot Password?</Text>
+        </View>
+      </View>
+
+      <ButtonComponent mode="contained" text="Login" />
+
+
+      <View style={[base.flex, base.row, base.justifyCenter]}>
+        <Text>Don ‘t have an account? Register </Text>
+      </View>
+    </View>)
+}
