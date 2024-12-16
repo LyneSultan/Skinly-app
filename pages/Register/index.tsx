@@ -17,7 +17,7 @@ export const Register = () => {
       <View style={style.registerForm}>
         <Input label="name" text="enter your name" />
         <Input label="email" text="enter your email" />
-        <Input label="password" text="enter your password" />
+        <Input label="password" text="enter your password" password={true} />
         <Input label="Confirm password" text="enter your password again" />
       </View>
       <ButtonComponent mode="contained" text="Login" />

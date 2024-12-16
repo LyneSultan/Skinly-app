@@ -6,7 +6,7 @@ import { style } from "./style"
 export const Login = () => {
   return (
     <View style={[style.container]}>
-      <Image source={require('./../../assets/images/backIcon.png')} />
+      <Image source={require('@/assets/images/backIcon.png')} />
 
       <View>
         <Text>Welcome back! Glad to see you, Again!</Text>
@@ -14,7 +14,7 @@ export const Login = () => {
 
       <View style={style.loginForm}>
         <Input label="Name" text="Enter your name"></Input>
-        <Input label="password" text="Enter your password"></Input>
+        <Input label="password" text="Enter your password" password={true}></Input>
       </View>
 
       <View style={base.flex}>
@@ -27,7 +27,7 @@ export const Login = () => {
 
 
       <View style={[base.flex, base.row, base.justifyCenter]}>
-        <Text>Don ‘t have an account? Register </Text>
+        <Text>Don ‘t have an account?<Text>Register</Text>  </Text>
       </View>
     </View>)
 }
