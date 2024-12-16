@@ -1,6 +1,7 @@
 import ButtonComponent from "@/components/base/Button"
 import { Input } from "@/components/base/Input"
 import { base } from "@/style/base"
+import { typography } from "@/style/typography"
 import { Image, Text, View } from "react-native"
 import { style } from "./style"
 export const Login = () => {
@@ -9,7 +10,7 @@ export const Login = () => {
       <Image source={require('@/assets/images/backIcon.png')} />
 
       <View>
-        <Text>Welcome back! Glad to see you, Again!</Text>
+        <Text style={typography.h1}>Welcome back! Glad to see you, Again!</Text>
       </View>
 
       <View style={style.loginForm}>
@@ -27,7 +28,7 @@ export const Login = () => {
 
 
       <View style={[base.flex, base.row, base.justifyCenter]}>
-        <Text>Don ‘t have an account?<Text>Register</Text>  </Text>
+        <Text>Don ‘t have an account? <Text style={[style.login, typography.bold]}>Register</Text>  </Text>
       </View>
     </View>)
 }

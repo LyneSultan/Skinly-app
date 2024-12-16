@@ -24,7 +24,7 @@ export const Register = () => {
 
 
       <View style={[base.flex, base.row, base.justifyCenter]}>
-        <Text>Don ‘t have an account?<Text style={[style.register, typography.bold]}>Register</Text>  </Text>
+        <Text>Already have an account?  <Text style={[style.register, typography.bold]}>Login</Text>  </Text>
       </View>
 
     </View>

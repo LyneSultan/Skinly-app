@@ -1,4 +1,5 @@
 
+import { colors } from '@/colors/colors';
 import { StyleSheet } from 'react-native';
 
 export const style = StyleSheet.create({
@@ -12,6 +13,10 @@ export const style = StyleSheet.create({
   },
   forgetPassword: {
     alignSelf:"flex-end"
+  },
+  login: {
+    color: colors.primary,
   }
+
 
 })
