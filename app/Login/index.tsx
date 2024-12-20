@@ -2,9 +2,11 @@ import ButtonComponent from "@/components/base/Button"
 import { Input } from "@/components/base/Input"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
+import { Link } from "expo-router"
 import { Image, Text, View } from "react-native"
 import { style } from "./style"
-export const Login = () => {
+
+const Login = () => {
   return (
     <View style={[style.container]}>
       <Image source={require('@/assets/images/backIcon.png')} />
@@ -28,7 +30,8 @@ export const Login = () => {
 
 
       <View style={[base.flex, base.row, base.justifyCenter]}>
-        <Text>Don ‘t have an account? <Text style={[style.login, typography.bold]}>Register</Text>  </Text>
+        <Text>Don ‘t have an account? <Link href="/Register"><Text style={[style.login, typography.bold]}>Register</Text> </Link> </Text>
       </View>
-    </View>)
+    </View >)
 }
+export default Login;

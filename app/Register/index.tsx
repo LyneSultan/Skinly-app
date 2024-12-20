@@ -5,7 +5,7 @@ import { typography } from "@/style/typography"
 import { Image, Text, View } from "react-native"
 import { style } from "./style"
 
-export const Register = () => {
+const Register = () => {
   return (
     <View style={[style.container]}>
       <Image source={require('@/assets/images/backIcon.png')} />
@@ -31,3 +31,4 @@ export const Register = () => {
 
   )
 }
+export default Register;
