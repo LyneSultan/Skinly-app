@@ -8,6 +8,10 @@ export const style = StyleSheet.create({
     height:45,
     backgroundColor: colors.rose,
     ...base.borderRadius,
+    ...base.gap,
+  },
+  productsContainer: {
+    // backgroundColor:colors.primary
   },
   productCard: {
     width:"45%"
