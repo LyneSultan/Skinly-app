@@ -4,7 +4,7 @@ export const base = StyleSheet.create({
   default: {
     height: "100%",
     width: "90%",
-    marginTop: 20,
+    marginVertical: 20,
   },
   flex: {
     display: 'flex',
@@ -24,6 +24,9 @@ export const base = StyleSheet.create({
   spaceBetween: {
     justifyContent:"space-between"
   },
+  spaceAround: {
+    justifyContent:"space-around"
+  },
   wrap: {
     flexWrap: 'wrap',
   },
@@ -35,5 +38,11 @@ export const base = StyleSheet.create({
   },
   maxWidth: {
     maxWidth:"90%",
+  },
+  padding: {
+    padding:10,
+  },
+  gap: {
+    gap:10,
   }
 });
