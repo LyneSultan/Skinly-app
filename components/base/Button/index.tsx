@@ -1,21 +1,30 @@
+import { colors } from '@/colors/colors';
 import { Button } from 'react-native-paper';
 import { styles } from './style';
 
 interface buttonProps {
   mode: 'text' | 'outlined' | 'contained';
   text: string;
+  onPress?: () => void;
 }
 
-const ButtonComponent = ({ mode, text }: buttonProps) => {
+const ButtonComponent = ({ mode, text, onPress }: buttonProps) => {
   return (
     <Button
       mode={mode}
-      onPress={() => console.log('Pressed')}
-      style={styles.button}
+      textColor="#000000"
+      onPress={onPress}
+      style={[
+        styles.button,
+        mode === 'outlined' && {
+          backgroundColor: 'white',
+          borderColor: colors.secondary,
+          borderWidth: 3,
+        },
+      ]}
     >
       {text}
-    </Button >
-  )
-}
-
+    </Button>
+  );
+};
 export default ButtonComponent;
