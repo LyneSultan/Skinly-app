@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 export const base = StyleSheet.create({
   default: {
     height: "100%",
-    width: "100%",
-    marginTop: 20
+    width: "90%",
+    marginTop: 20,
   },
   flex: {
     display: 'flex',
@@ -21,10 +21,19 @@ export const base = StyleSheet.create({
   alignCenter: {
     alignItems: "center"
   },
+  spaceBetween: {
+    justifyContent:"space-between"
+  },
   wrap: {
     flexWrap: 'wrap',
   },
   background: {
     backgroundColor: 'black',
   },
+  borderRadius: {
+    borderRadius: 20,
+  },
+  maxWidth: {
+    maxWidth:"90%",
+  }
 });
