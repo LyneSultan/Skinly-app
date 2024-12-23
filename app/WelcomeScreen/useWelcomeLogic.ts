@@ -4,7 +4,7 @@ export const useWelcomeLogic = () => {
   const router = useRouter();
 
   const handleStart = () => {
-    router.push('/Login');
+    router.push('/OnBoardingScreen1');
   }
   return {
     handleStart

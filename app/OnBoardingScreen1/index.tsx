@@ -10,8 +10,7 @@ const OnboardingScreen1 = () => {
         <Image source={require('@/assets/images/onboarding1.png')} />
       </View>
 
-      <OnboardingCard title="Know Your Ingredient" subtitle="Learn what goes into your skincare " />
-
+      <OnboardingCard title="Know Your Ingredient" subtitle="Learn what goes into your skincare " path="/Login" />
 
     </View>
   )
