@@ -10,7 +10,6 @@ import { useHomeLogic } from "./useHomeLogic";
 
 const HomeScreen = () => {
   const { fetchData, setData, data, handleViewMore, page, setPage } = useHomeLogic();
-  console.log(process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     const getData = async () => {
@@ -26,8 +25,8 @@ const HomeScreen = () => {
 
   return (
     <ScrollView>
-      <View style={[base.flex, base.alignCenter]}>
-        <View style={[base.gap, base.maxWidth]}>
+      <View style={[base.flex, base.alignCenter, base.default]}>
+        <View style={[base.gap]}>
           <Text style={[typography.h1]}>Hello,</Text>
           <Text>Let’s take care of your skin!</Text>
 
@@ -42,50 +41,41 @@ const HomeScreen = () => {
           </View>
 
           <Text>Products</Text>
+
           <View style={style.productsContainer}>
             {data.length > 0 ? (
               data.map((d) => (
                 <View style={[base.flex, base.row, base.wrap, base.spaceAround, base.gap]}>
                   {d.products?.map((product) => (
-                    <View style={[base.gap, style.productCard]} key={product.title}>
-                      {product.image ? (
-                        <Image
-                          source={{ uri: product.image }}
-                          style={[style.productImage, base.borderRadius]}
-                        />
-                      ) : (
-                        <Text>No Image Available</Text>
-                      )}
-                      <Text
-                        style={[style.text]}
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                      >
-                        {product.title || "Unnamed Product"}
+
+                    <View style={[base.gap, style.productCard]} key={product.name}>
+                      <Image source={{ uri: product.image }} style={[style.productImage, base.borderRadius]} />
+
+                      <Text style={[style.text]} numberOfLines={2} ellipsizeMode="tail">
+                        {product.name}
                       </Text>
                     </View>
+
                   ))}
                 </View>
               ))
-            ) : (
-              <Text>Loading products...</Text>
-            )}
-          </View>
+            ) : (<Text>Loading products...</Text>)}
 
+          </View>
         </View>
+
         <View>
           <TouchableOpacity
             onPress={async () => {
               const current = page + 1;
               setPage(current);
-              const x = await handleViewMore(current);
-              setData((prev) => [...prev, ...x]);
-            }}
-          >
-
+              const products = await handleViewMore(current);
+              setData((prev) => [...prev, ...products]);
+            }} >
             <Text>View More</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     </ScrollView >
   );

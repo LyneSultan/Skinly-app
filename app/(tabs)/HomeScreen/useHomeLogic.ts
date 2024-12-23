@@ -1,12 +1,14 @@
 import { fetch } from 'expo/fetch';
 import { useState } from 'react';
 
+const pageSize = 6;
+
 export const useHomeLogic = () => {
   const [data, setData] = useState<DataItem[]>([]);
   const [page, setPage] = useState(1);
  const fetchData = async () => {
    try {
-    const response = await fetch('http://192.168.10.128:3000/product?page=1&pageSize=6');
+    const response = await fetch(`http://192.168.248.239:3000/product?page=1&pageSize=${pageSize}`);
     const data = await response.json();
     return data;
 
@@ -17,7 +19,7 @@ export const useHomeLogic = () => {
 
   const handleViewMore=async(page:number) => {
     try {
-      const response = await fetch(`http://192.168.10.128:3000/product?page=${page}&pageSize=6`);
+      const response = await fetch(`http://192.168.248.239:3000/product?page=${page}&pageSize=${pageSize}`);
       const data = await response.json();
       console.log(response);
       return data;
@@ -36,10 +38,9 @@ export const useHomeLogic = () => {
   }
 
 }
-// export default useHomeLogic;
  type Product = {
   image: string;
-  title: string;
+  name: string;
   price: string;
 };
 
