@@ -3,16 +3,15 @@ import { Input } from "@/components/base/Input"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
 import { Link } from "expo-router"
-import { Image, Text, View } from "react-native"
+import { Text, View } from "react-native"
 import { style } from "./style"
 import { useLoginLogic } from "./useLoginLogic"
 
 const Login = () => {
   const { handleLogin } = useLoginLogic();
   return (
-    <View style={[base.flex, base.alignCenter]}>
+    <View style={[base.flex, base.alignCenter, base.default]}>
       <View style={[style.container]}>
-        <Image source={require('@/assets/images/backIcon.png')} />
 
         <View>
           <Text style={typography.h1}>Welcome back! Glad to see you, Again!</Text>

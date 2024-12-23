@@ -6,7 +6,7 @@ export const style = StyleSheet.create({
 
   container: {
     gap: 20,
-    width: "90%",
+    width:"100%"
   },
   loginForm: {
     gap:10
