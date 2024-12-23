@@ -1,15 +1,6 @@
-import { Text, View } from "react-native";
-import ButtonComponent from "./../components/base/Button/Button";
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
+import { Redirect } from "expo-router";
 
-      }}
-    >
-      <ButtonComponent mode="contained" text="here" />
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+const Index = () => {
+  return <Redirect href='/WelcomeScreen' />;
 }
+export default Index;
