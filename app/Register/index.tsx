@@ -3,17 +3,15 @@ import { Input } from "@/components/base/Input"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
 import { Link } from "expo-router"
-import { Image, Text, View } from "react-native"
+import { Text, View } from "react-native"
 import { style } from "./style"
 import { useRegisterLogic } from "./useRegisterLogic"
 
 const Register = () => {
   const { handleRegister } = useRegisterLogic();
   return (
-    <View style={[base.flex, base.alignCenter]}>
-
+    <View style={[base.flex, base.alignCenter, base.default]}>
       <View style={[style.container]}>
-        <Image source={require('@/assets/images/backIcon.png')} />
 
         <View>
           <Text style={typography.h1}>Hello! Register to get started</Text>
