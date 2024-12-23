@@ -7,8 +7,8 @@ export default function RootLayout() {
       <Stack.Screen name="index" options={{ title: 'Login' }} />
       <Stack.Screen name="Register/index" options={{ title: 'Register' }} />
       <Stack.Screen name="Login/index" options={{ title: 'Login' }} />
-      <Stack.Screen name="HomeScreen1/index" options={{ title: '1' }} />
       <Stack.Screen name="SkinScan/index" options={{ title: 'Skin detection' }} />
+      <Stack.Screen name="WelcomeScreen/index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
     </Stack>
