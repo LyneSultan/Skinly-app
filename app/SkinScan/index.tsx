@@ -9,8 +9,8 @@ import { useSkinPageLogic } from './useSkinPageLogic';
 
 
 const SkinScan = () => {
+  const { pickImage, takePicture, apiResponse } = useSkinPageLogic();
 
-  const { pickImage, takePicture, imageUri } = useSkinPageLogic();
   return (
     <View style={[base.flex, base.alignCenter,]}>
       <View style={[base.maxWidth, base.gap]}>
@@ -34,6 +34,9 @@ const SkinScan = () => {
         <ButtonComponent text='Take picture' mode='contained' onPress={takePicture} />
         <ButtonComponent text='Upload picture' mode='outlined' onPress={pickImage} />
 
+        {apiResponse && (
+          <Text>{typeof apiResponse === 'object' ? JSON.stringify(apiResponse) : apiResponse}</Text>
+        )}
       </View>
     </View >
   );
