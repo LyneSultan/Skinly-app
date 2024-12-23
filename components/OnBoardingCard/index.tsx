@@ -2,12 +2,13 @@ import { typography } from "@/style/typography";
 import { Text, View } from "react-native";
 import ButtonComponent from "../base/Button";
 import { style } from "./style";
+import { cardProps } from "./useCardLogic";
 
-const OnboardingCard = () => {
+const OnboardingCard = ({ title, subtitle }: cardProps) => {
   return (
     <View style={style.card}>
-      <Text style={[style.text, typography.h1, typography.bold]}>Know Your Ingredient</Text>
-      <Text style={style.text}>Learn what goes into your skincare</Text>
+      <Text style={[style.text, typography.h1, typography.bold]}>{title}</Text>
+      <Text style={style.text}>{subtitle}</Text>
       <View>
         <ButtonComponent text="Next" mode="contained" />
       </View>

@@ -6,7 +6,7 @@ export const style= StyleSheet.create({
   card: {
     backgroundColor: colors.primary,
     ...base.borderRadius,
-    gap: 20,
+    gap: 30,
     minHeight:200,
     elevation: 4,
     padding: 40,
