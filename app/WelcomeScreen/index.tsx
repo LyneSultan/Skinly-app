@@ -7,15 +7,19 @@ const WelcomeScreen = () => {
   return (
     <ImageBackground
       source={require("./../../assets/images/welcome.png")}
-      style={style.background}
-      resizeMode="cover"
-    >
-      <View style={[base.flex, base.alignCenter, base.gap]}>
-        <View >
+      style={[style.background]}
+      resizeMode="cover">
+
+      <View style={[base.flex, base.alignCenter, base.spaceAround, { height: '100%' }, base.default]}>
+
+        <View>
           <Text style={[style.title]}>Skinly</Text>
         </View>
 
-        <View style={{ width: '90%', alignItems: 'center' }}>
+        <View></View>
+        <View></View>
+
+        <View style={[style.buttonContainer]}>
           <ButtonComponent text="Start" mode="contained" />
         </View>
 

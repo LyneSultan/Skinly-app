@@ -6,6 +6,9 @@ export const style = StyleSheet.create({
   background: {
     flex: 1,
   },
+  buttonContainer: {
+     width: '100%'
+  },
   title: {
     marginVertical: 40,
     fontSize:42,

@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 export const base = StyleSheet.create({
   default: {
     height: "100%",
-    width: "90%",
     marginVertical: 20,
+    marginHorizontal:20,
   },
   flex: {
     display: 'flex',
