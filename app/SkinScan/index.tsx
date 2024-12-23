@@ -7,19 +7,18 @@ import { Text, View } from "react-native";
 import { style } from './style';
 import { useSkinPageLogic } from './useSkinPageLogic';
 
-
 const SkinScan = () => {
   const { pickImage, takePicture, apiResponse } = useSkinPageLogic();
 
   return (
-    <View style={[base.flex, base.alignCenter,]}>
-      <View style={[base.maxWidth, base.gap]}>
+    <View style={[base.flex, base.alignCenter, base.default]}>
+      <View style={[base.gap]}>
         <Text style={[typography.h1]}>One click away from personalized skincare insights</Text>
 
-        <View style={[style.requirementCard, base.gap]}>
+        <View style={[style.requirementCard]}>
 
-          <View style={[base.flex, base.alignCenter]}>
-            <Text style={[typography.h1]}> Snap, Scan, Transform!</Text>
+          <View style={[base.flex, base.alignCenter, { marginBottom: "15%" }]}>
+            <Text style={[typography.h2]}> Snap, Scan, Transform!</Text>
           </View>
 
           <View style={[base.flex, base.column, base.gap]}>
@@ -30,13 +29,18 @@ const SkinScan = () => {
 
         </View>
 
+        <View>
+          <ButtonComponent text='Take picture' mode='contained' onPress={takePicture} />
+        </View>
 
-        <ButtonComponent text='Take picture' mode='contained' onPress={takePicture} />
-        <ButtonComponent text='Upload picture' mode='outlined' onPress={pickImage} />
+        <View>
+          <ButtonComponent text='Upload picture' mode='outlined' onPress={pickImage} />
+        </View>
 
         {apiResponse && (
           <Text>{typeof apiResponse === 'object' ? JSON.stringify(apiResponse) : apiResponse}</Text>
         )}
+
       </View>
     </View >
   );
