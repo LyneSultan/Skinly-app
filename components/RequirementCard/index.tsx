@@ -2,7 +2,7 @@ import { base } from '@/style/base';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 
-interface RequirementItemProps {
+type RequirementItemProps = {
   image: any;
   text: string;
 }

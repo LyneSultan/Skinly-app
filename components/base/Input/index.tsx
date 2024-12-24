@@ -1,23 +1,22 @@
 import { TextInput } from 'react-native-paper';
 import { styles, theme } from './styles';
 
-interface inputProps {
+type InputProps = {
   label: string;
   text: string;
-  password?: boolean
+  password?: boolean;
 }
-export const Input = ({ label, text, password }: inputProps) => {
 
+export const Input = ({ label, text, password }: InputProps) => {
   return (
     <TextInput
       label={label}
       placeholder={text}
-      // value={""}
       secureTextEntry={password}
-
       mode="outlined"
       outlineStyle={styles.outline}
       theme={{ colors: theme }}
+      style={{ height: 45 }}
     />
-  )
-}
+  );
+};

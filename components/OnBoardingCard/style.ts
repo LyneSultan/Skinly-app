@@ -7,7 +7,7 @@ export const style= StyleSheet.create({
     backgroundColor: colors.primary,
     ...base.borderRadius,
     gap: 30,
-    minHeight:200,
+    minHeight:260,
     elevation: 4,
     padding: 40,
   },
