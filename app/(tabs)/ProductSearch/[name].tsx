@@ -34,7 +34,15 @@ const ProductSearch = () => {
                 style={[style.productImage, base.borderRadius]}
               />
             </View>
+            <View style={[base.flex, base.row, base.spaceAround]}>
+              <View>
+                <Image
+                  source={{ uri: item.company_logo }}
+                  style={[style.logo, base.borderRadius]}
+                />
+              </View>
 
+            </View>
 
           </View>
         ))}
