@@ -1,7 +1,7 @@
 import { base } from '@/style/base';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { style } from './style';
 import { ProductDetails, useProductLogic } from './useProductLogic';
 
@@ -40,6 +40,14 @@ const ProductSearch = () => {
                   source={{ uri: item.company_logo }}
                   style={[style.logo, base.borderRadius]}
                 />
+              </View>
+
+              <View>
+                <Text>{item.companyName}</Text>
+              </View>
+
+              <View>
+                <Text>{item.product.price}</Text>
               </View>
 
             </View>
