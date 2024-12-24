@@ -11,11 +11,13 @@ export const style = StyleSheet.create({
     ...base.gap,
   },
   productsContainer: {
-    // backgroundColor:colors.primary
+    width: "45%",
+    marginBottom:12,
+
   },
   productCard: {
-    width: "45%",
-    marginBottom:10,
+    gap:7,
+    width: "100%",
   },
   text: {
     width: "100%",
