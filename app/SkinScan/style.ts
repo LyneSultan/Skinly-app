@@ -1,3 +1,4 @@
+import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { StyleSheet } from "react-native";
 
@@ -10,7 +11,7 @@ export const style = StyleSheet.create({
   },
   requirementCard: {
     minHeight:250,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.primary,
     padding: 20,
     shadowColor: '#000000',
     elevation: 5,

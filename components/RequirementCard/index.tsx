@@ -11,7 +11,7 @@ const RequirementItem = ({ image, text }: RequirementItemProps) => {
   return (
     <View style={[base.flex, base.row, base.alignCenter, base.gap]}>
       <Image source={image} />
-      <Text>{text}</Text>
+      <Text style={base.whiteText}>{text}</Text>
     </View>
   );
 };

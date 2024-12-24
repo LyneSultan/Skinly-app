@@ -6,7 +6,9 @@ export const typography = StyleSheet.create({
     fontSize: 24,
   },
   h2: {
-    fontSize:18,
+    fontSize: 18,
+    fontFamily: "PoppinsRegular",
+
   },
   bold: {
     fontWeight: 'bold',

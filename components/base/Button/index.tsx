@@ -2,13 +2,13 @@ import { colors } from '@/colors/colors';
 import { Button } from 'react-native-paper';
 import { styles } from './style';
 
-interface buttonProps {
-  mode: 'text' | 'outlined' | 'contained';
+type buttonProps = {
+  mode?: 'text' | 'outlined' | 'contained';
   text: string;
   onPress?: () => void;
 }
 
-const ButtonComponent = ({ mode, text, onPress }: buttonProps) => {
+const ButtonComponent = ({ mode = 'contained', text, onPress }: buttonProps) => {
   return (
     <Button
       mode={mode}

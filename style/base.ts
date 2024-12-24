@@ -44,5 +44,8 @@ export const base = StyleSheet.create({
   },
   gap: {
     gap:10,
+  },
+  whiteText: {
+    color:"#fff"
   }
 });

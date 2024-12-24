@@ -6,6 +6,7 @@ import { useWelcomeLogic } from "./useWelcomeLogic";
 
 const WelcomeScreen = () => {
   const { handleStart } = useWelcomeLogic();
+
   return (
     <ImageBackground
       source={require("./../../assets/images/welcome.png")}
