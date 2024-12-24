@@ -29,3 +29,8 @@ export type Product = {
   link: string;
 }
 
+export type ProductDetails = {
+  companyName: string;
+  company_logo: string;
+  product: Product;
+}
