@@ -9,9 +9,16 @@ export const style = StyleSheet.create({
     backgroundColor: colors.rose,
     ...base.borderRadius
   },
+  productContainer: {
+    backgroundColor: colors.secondary,
+    width: "45%",
+    height:200,
+    padding: 20,
+    ...base.borderRadius
+  },
   productImage: {
-    width: 150,
-    height:150,
+    width: "100%",
+    aspectRatio: 1,
   },
   logo: {
     width: 24,
