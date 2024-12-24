@@ -1,13 +1,33 @@
+import { base } from '@/style/base';
 import { useLocalSearchParams } from 'expo-router';
-import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
+import { ProductDetails, useProductLogic } from './useProductLogic';
 
-export default function ProductDetails() {
-  const { name } = useLocalSearchParams(); // Get the product ID from the URL
+const ProductSearch = () => {
+  const { name } = useLocalSearchParams();
+  const { getProduct } = useProductLogic();
+  const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const details = await getProduct();
+        setProductDetails(details);
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    };
+    fetchProductDetails();
+  }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 20 }}>Product Details</Text>
-      <Text style={{ fontSize: 16 }}>Product name: {name}</Text>
-    </View>
+    <ScrollView style={[base.flex, base.column, base.default]}>
+      <View style={[base.flex, base.row, base.spaceAround]}>
+
+      </View>
+    </ScrollView>
   );
 }
+
+export default ProductSearch;
