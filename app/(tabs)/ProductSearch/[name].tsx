@@ -13,14 +13,14 @@ const ProductSearch = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const details = await getProduct();
+        const details = await getProduct(name);
         setProductDetails(details);
       } catch (error) {
         console.error('Error fetching product details:', error);
       }
     };
     fetchProductDetails();
-  }, []);
+  }, [name]);
 
   return (
     <ScrollView style={[base.flex, base.column, base.default]}>
