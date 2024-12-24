@@ -16,16 +16,21 @@ const ProductSearch = () => {
       </View>
 
       <View>
-        <View style={[base.flex, base.row]}>
+        <View style={[base.flex, base.row, base.gap]}>
           <View>
             <Image
               source={{ uri: "https://cdn.shopify.com/s/files/1/2488/5102/products/Cicalphate_580x.jpg?v=1591268381 " }}
               style={[style.productImage, base.borderRadius]}
             />
           </View>
-          <View>
+          <View style={[base.gap, base.flex, base.alignCenter, base.justifyCenter]}>
             <Image
               source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFp5ldaRoJHuCaQQraX1G-Y6_lXSLNtGBtpA&s" }}
+              style={[style.logo, base.borderRadius]}
+            />
+            <Text>9$</Text>
+            <Image
+              source={require('@/assets/images/link.png')}
               style={[style.logo, base.borderRadius]}
             />
           </View>
