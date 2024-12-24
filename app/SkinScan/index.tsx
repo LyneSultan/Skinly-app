@@ -18,11 +18,11 @@ const SkinScan = () => {
         <View style={[style.requirementCard]}>
 
           <View style={[base.flex, base.alignCenter, { marginBottom: "15%" }]}>
-            <Text style={[typography.h2]}> Snap, Scan, Transform!</Text>
+            <Text style={[typography.h2, base.whiteText]}> Snap, Scan, Transform!</Text>
           </View>
 
           <View style={[base.flex, base.column, base.gap]}>
-            <RequirementItem text='Relax your face.' image={require('@/assets/images/face.png')} />
+            <RequirementItem text='Relax your face' image={require('@/assets/images/face.png')} />
             <RequirementItem text='Do not apply any products' image={require('@/assets/images/product.png')} />
             <RequirementItem text='Sit in a good lighting' image={require('@/assets/images/lighting.png')} />
           </View>
@@ -30,7 +30,7 @@ const SkinScan = () => {
         </View>
 
         <View>
-          <ButtonComponent text='Take picture' mode='contained' onPress={takePicture} />
+          <ButtonComponent text='Take picture' onPress={takePicture} />
         </View>
 
         <View>

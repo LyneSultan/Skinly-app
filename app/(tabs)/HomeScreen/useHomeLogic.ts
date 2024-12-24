@@ -1,7 +1,7 @@
 import { fetch } from 'expo/fetch';
 import { useState } from 'react';
 
-const pageSize = 6;
+const pageSize = 4;
 
 export const useHomeLogic = () => {
   const [data, setData] = useState<DataItem[]>([]);

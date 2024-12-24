@@ -6,7 +6,7 @@ export const style = StyleSheet.create({
   scanContainer: {
     padding:10,
     height:45,
-    backgroundColor: colors.rose,
+    backgroundColor: colors.primary,
     ...base.borderRadius,
     ...base.gap,
   },
@@ -14,7 +14,8 @@ export const style = StyleSheet.create({
     // backgroundColor:colors.primary
   },
   productCard: {
-    width:"45%"
+    width: "45%",
+    marginBottom:10,
   },
   text: {
     width: "100%",
