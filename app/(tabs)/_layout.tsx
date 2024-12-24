@@ -10,6 +10,9 @@ const Layout = () => {
         options={{ href: null, }} />
 
       <Tabs.Screen
+        name="ProductSearch/[name]"
+        options={{ href: null, }} />
+      <Tabs.Screen
         name="HomeScreen/index"
         options={{
           title: 'Home', tabBarIcon: ({ color }) => <FontAwesome size={24} name="home" color={color} />,
