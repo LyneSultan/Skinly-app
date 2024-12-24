@@ -1,3 +1,5 @@
+import { Linking } from "react-native";
+
 export const useProductLogic = () => {
   const getProduct = async () => {
     try {
@@ -17,8 +19,13 @@ export const useProductLogic = () => {
     }
   };
 
+  const productLink  = (url: string) => {
+    Linking.openURL(url).catch((err) => console.error('Error opening URL', err));
+  };
+
   return {
     getProduct,
+    productLink
   };
 };
 
