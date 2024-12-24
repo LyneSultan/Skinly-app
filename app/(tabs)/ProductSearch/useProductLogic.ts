@@ -21,3 +21,11 @@ export const useProductLogic = () => {
     getProduct,
   };
 };
+
+export type Product = {
+  name: string;
+  price: string;
+  image: string;
+  link: string;
+}
+
