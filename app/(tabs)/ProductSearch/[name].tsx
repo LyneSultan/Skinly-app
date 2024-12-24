@@ -1,13 +1,13 @@
 import { base } from '@/style/base';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { style } from './style';
 import { ProductDetails, useProductLogic } from './useProductLogic';
 
 const ProductSearch = () => {
   const { name } = useLocalSearchParams();
-  const { getProduct } = useProductLogic();
+  const { getProduct, productLink } = useProductLogic();
   const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const ProductSearch = () => {
                 style={[style.productImage, base.borderRadius]}
               />
             </View>
-            <View style={[base.flex, base.row, base.spaceAround]}>
+            <View style={[base.flex, base.row, base.spaceBetween]}>
               <View>
                 <Image
                   source={{ uri: item.company_logo }}
@@ -50,7 +50,11 @@ const ProductSearch = () => {
                 <Text>{item.product.price}</Text>
               </View>
 
+
             </View>
+            <TouchableOpacity onPress={() => productLink(item.product.link)} style={base.alignCenter}>
+              <Text>Learn more</Text>
+            </TouchableOpacity>
 
           </View>
         ))}
