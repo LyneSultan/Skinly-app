@@ -1,3 +1,4 @@
+import { View } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
 import { styles, theme } from './styles';
 
@@ -7,15 +8,17 @@ type InputProps = {
   password?: boolean;
   errorText?: string;
   hasErrors?: boolean;
+  onChangeText?: (text: string) => void;
 }
 
-export const Input = ({ label, text, password, errorText, hasErrors }: InputProps) => {
+export const Input = ({ label, text, password, onChangeText, errorText, hasErrors }: InputProps) => {
   return (
-    <>
+    <View>
       <TextInput
         label={label}
         placeholder={text}
         secureTextEntry={password}
+        onChangeText={onChangeText}
         mode="outlined"
         outlineStyle={styles.outline}
         theme={{ colors: theme }}
@@ -28,6 +31,6 @@ export const Input = ({ label, text, password, errorText, hasErrors }: InputProp
         </HelperText>
       )}
 
-    </>
+    </View>
   );
 };
