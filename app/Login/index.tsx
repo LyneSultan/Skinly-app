@@ -3,6 +3,7 @@ import { Input } from "@/components/base/Input"
 import { routes } from "@/routes/server.routes"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 import { Link } from "expo-router"
 import { useState } from "react"
@@ -34,8 +35,12 @@ const Login = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log('Response:', response);
-      console.log('Response Data:', response.data);
+      const token = response.data.access_token;
+
+      await AsyncStorage.setItem('authToken', token);
+
+      const storedToken = await AsyncStorage.getItem('authToken');
+      console.log('Stored Token:', storedToken);
     } catch (error) {
       console.error('Error Data:', error.response.data.message);
     };
