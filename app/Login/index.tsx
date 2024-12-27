@@ -1,14 +1,30 @@
 import ButtonComponent from "@/components/base/Button"
 import { Input } from "@/components/base/Input"
+import { routes } from "@/routes/server.routes"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
+import axios from 'axios'
 import { Link } from "expo-router"
 import { Text, View } from "react-native"
 import { style } from "./style"
-import { useLoginLogic } from "./useLoginLogic"
 
 const Login = () => {
-  const { handleLogin } = useLoginLogic();
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+  const handleLogin = async () => {
+    const payload = {
+      email: "hello1111@gmail.com",
+      password: "1111111",
+    };
+
+    const response = await axios.post(apiUrl + routes.login, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(response.data);
+  };
+
   return (
     <View style={[base.flex, base.alignCenter, base.default]}>
       <View style={[style.container]}>
