@@ -11,7 +11,7 @@ const SkinScan = () => {
   const { pickImage, takePicture, apiResponse } = useSkinPageLogic();
 
   return (
-    <View style={[base.flex, base.alignCenter, base.default]}>
+    <View style={[base.flex, base.default]}>
       <View style={[base.gap]}>
         <Text style={[typography.h1]}>One click away from personalized skincare insights</Text>
 

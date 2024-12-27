@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.secondary,
     ...base.borderRadius,
-    height: 45,
     width:'100%'
   },
 });

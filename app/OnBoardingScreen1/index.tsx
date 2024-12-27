@@ -5,8 +5,8 @@ import { Image, View } from "react-native";
 const OnboardingScreen1 = () => {
 
   return (
-    <View style={[base.default, base.alignCenter, base.column, base.spaceAround]}>
-      <View>
+    <View style={[base.default, base.flex, base.column, base.spaceAround]}>
+      <View style={base.alignCenter}>
         <Image source={require('@/assets/images/onboarding1.png')} />
       </View>
 
