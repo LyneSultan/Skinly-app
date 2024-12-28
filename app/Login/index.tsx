@@ -19,8 +19,8 @@ const Login = () => {
         </View>
 
         <View style={style.loginForm}>
-          <Input label="Email" text="Enter your email" onChangeText={(email) => setEmail(email)}> </Input>
-          <Input label="password" text="Enter your password" password={true} onChangeText={(password) => setPassword(password)}></Input>
+          <Input label="Email" text="Enter your email" onChangeText={(value) => setEmail(value)} />
+          <Input label="Password" text="Enter your password" password={true} onChangeText={(password) => setPassword(password)} />
         </View>
 
         <View style={base.flex}>
@@ -46,6 +46,7 @@ const Login = () => {
           <Text>Don ‘t have an account? <Link href="/Register"><Text style={[style.login, typography.bold]}>Register</Text> </Link> </Text>
         </View>
       </View >
-    </View>)
+    </View>
+  )
 }
 export default Login;

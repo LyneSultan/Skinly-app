@@ -11,11 +11,9 @@ export const useLoginLogic = () => {
   const [errorMessages, setErrorMessages] = useState([]);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
   const handleLogin = async () => {
-    const payload = {
-      email,
-      password,
-    };
+    const payload = { email, password };
 
     try {
       const response = await axios.post(apiUrl + routes.login, payload, {
@@ -35,7 +33,6 @@ export const useLoginLogic = () => {
       setErrorMessages(error.response.data.message);
     };
   }
-
 
   return {
     handleLogin,
