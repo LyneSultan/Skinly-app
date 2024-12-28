@@ -1,10 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 export const style = StyleSheet.create({
-  productCard: {
-    width: "40%",
+  productsContainer: {
+    width: "45%",
     marginBottom:12,
 
+  },
+  productCard: {
+    gap:7,
+    width: "100%",
   },
   text: {
     width: "100%",
