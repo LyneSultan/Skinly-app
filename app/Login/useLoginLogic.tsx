@@ -8,6 +8,7 @@ export const useLoginLogic = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const handleLogin = async () => {
@@ -29,8 +30,9 @@ export const useLoginLogic = () => {
       const storedToken = await AsyncStorage.getItem('authToken');
       console.log('Stored Token:', storedToken);
       router.push('/(tabs)/HomeScreen')
-    } catch (error) {
-      console.error('Error Data:', error.response.data.message);
+
+    } catch (error: any) {
+      setErrorMessages(error.response.data.message);
     };
   }
 
@@ -38,6 +40,7 @@ export const useLoginLogic = () => {
   return {
     handleLogin,
     setEmail,
-    setPassword
+    setPassword,
+    errorMessages
   };
 }
