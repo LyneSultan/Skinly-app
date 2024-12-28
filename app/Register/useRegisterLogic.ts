@@ -10,6 +10,7 @@ export const useRegisterLogic = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [password_confirmation, setPasswordConfirmation] = useState('');
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const handleRegister = async () => {
@@ -35,8 +36,8 @@ export const useRegisterLogic = () => {
       console.log('Stored Token:', storedToken);
 
       router.push('/(tabs)/HomeScreen')
-    } catch (error:any) {
-      console.error('Error Data:', error.response.data.message);
+    } catch (error: any) {
+      setErrorMessages(error.response.data.message);
     };
   }
 
@@ -46,5 +47,6 @@ export const useRegisterLogic = () => {
     setName,
     setPasswordConfirmation,
     handleRegister,
+    errorMessages
   };
 }

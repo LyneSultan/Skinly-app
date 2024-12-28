@@ -11,6 +11,9 @@ export const style = StyleSheet.create({
   },
   register: {
     color:colors.primary
+  },
+  error: {
+    color:colors.error
   }
 
 })
