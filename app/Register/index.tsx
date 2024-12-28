@@ -9,7 +9,7 @@ import { useRegisterLogic } from "./useRegisterLogic"
 
 const Register = () => {
 
-  const { setEmail, setName, setPassword, setPasswordConfirmation, handleRegister } = useRegisterLogic();
+  const { setEmail, setName, setPassword, setPasswordConfirmation, handleRegister, errorMessages } = useRegisterLogic();
 
   return (
     <View style={[base.flex, base.alignCenter, base.default]}>
@@ -31,6 +31,15 @@ const Register = () => {
         <View style={[base.flex, base.row, base.justifyCenter]}>
           <Text>Already have an account?  <Link href={"/Login"}><Text style={[style.register, typography.bold]}>Login</Text> </Link> </Text>
         </View>
+        {errorMessages.length > 0 && (
+          <View >
+            {errorMessages.map((msg) => (
+              <Text style={[style.error]}>
+                * {msg}
+              </Text>
+            ))}
+          </View>
+        )}
 
       </View>
     </View>
