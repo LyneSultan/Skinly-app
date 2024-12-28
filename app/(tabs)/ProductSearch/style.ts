@@ -11,8 +11,8 @@ export const style = StyleSheet.create({
   },
   productContainer: {
     backgroundColor: colors.secondary,
-    width: "45%",
-    height:200,
+    width: "47%",
+    height:300,
     padding: 20,
     ...base.borderRadius
   },

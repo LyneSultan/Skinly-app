@@ -5,7 +5,7 @@ import { base } from "@/style/base"
 import { typography } from "@/style/typography"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
-import { Link } from "expo-router"
+import { Link, router } from "expo-router"
 import { useState } from "react"
 import { Text, View } from "react-native"
 import { style } from "./style"
@@ -41,6 +41,7 @@ const Login = () => {
 
       const storedToken = await AsyncStorage.getItem('authToken');
       console.log('Stored Token:', storedToken);
+      router.push('/(tabs)/HomeScreen')
     } catch (error) {
       console.error('Error Data:', error.response.data.message);
     };
