@@ -8,7 +8,7 @@ import { style } from "./style"
 import { useLoginLogic } from "./useLoginLogic"
 
 const Login = () => {
-  const { setEmail, setPassword, handleLogin } = useLoginLogic();
+  const { setEmail, setPassword, handleLogin, errorMessages } = useLoginLogic();
 
   return (
     <View style={[base.flex, base.alignCenter, base.default]}>
@@ -28,6 +28,16 @@ const Login = () => {
             <Text>Forgot Password?</Text>
           </View>
         </View>
+
+        {errorMessages.length > 0 && (
+          <View >
+            {errorMessages.map((msg) => (
+              <Text style={style.errorText}>
+                * {msg}
+              </Text>
+            ))}
+          </View>
+        )}
 
         <ButtonComponent mode="contained" text="Login" onPress={handleLogin} />
 
