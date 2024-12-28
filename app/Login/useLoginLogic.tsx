@@ -25,9 +25,11 @@ export const useLoginLogic = () => {
 
       await AsyncStorage.setItem('authToken', token);
 
-      const storedToken = await AsyncStorage.getItem('authToken');
-      console.log('Stored Token:', storedToken);
-      router.push('/(tabs)/HomeScreen')
+      if (response.data.user.user_type === 'user') {
+        router.push('/(tabs)/HomeScreen')
+      } else if (response.data.user.user_type === 'company') {
+        router.push('/Company')
+      }
 
     } catch (error: any) {
       setErrorMessages(error.response.data.message);
