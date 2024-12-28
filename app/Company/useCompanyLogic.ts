@@ -4,12 +4,13 @@ import { useState } from 'react';
 const pageSize = 6;
 
 export const useCompanyLogic = () => {
-  const [data, setData] = useState<DataItem[]>([]);
+  const [data, setData] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
- const fetchData = async () => {
+ const fetchData = async (page:number) => {
    try {
-     const response = await fetch(`http://192.168.248.239:3000/product/676aae016da6361b6404a87f?page=1&pageSize=2`);
+     const response = await fetch(`http://192.168.248.239:3000/product/676aae016da6361b6404a87f?page=${page}&pageSize=6`);
      const data = await response.json();
+     console.log(data);
     return data.products;
 
   } catch (error) {
