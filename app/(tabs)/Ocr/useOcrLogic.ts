@@ -1,47 +1,22 @@
+import { PickImage } from '@/hooks/ImagePicker/pickImage';
+import { TakePicture } from '@/hooks/ImagePicker/takePicture';
 import { routes } from '@/routes/server.routes';
-import * as ImagePicker from 'expo-image-picker';
-import { useState } from 'react';
 
 export const useOcrLogic = () => {
-  const [imageUri, setImageUri] = useState<string | null>(null);
-  const [apiResponse, setApiResponse] = useState<any>(null);
 
-  const pickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  const { pickImage } = PickImage();
+  const { takePicture } = TakePicture();
 
-    if (!permissionResult.granted) {
-      alert('Permission to access gallery is required!');
-      return;
-    }
+  const handlePickImage = async () => {
+    const imageUri = await pickImage();
+    sendToApi(imageUri);
+  }
+  const handleTakePicture = async () => {
+    const imageUri = await takePicture();
+    sendToApi(imageUri);
+  }
 
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-    });
-
-    if (!result.canceled && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri);
-      sendImageToApi(result.assets[0].uri)
-
-    }
-  };
-  const takePicture = async () => {
-    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-
-    if (!permissionResult.granted) {
-      alert('Permission to access camera is required!');
-      return;
-    }
-
-    const result = await ImagePicker.launchCameraAsync();
-
-    if (!result.canceled && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri);
-      sendImageToApi(result.assets[0].uri)
-    }
-  };
-
-  const sendImageToApi = async (imageUri: string | null) => {
+  const sendToApi = async (imageUri: string|undefined) => {
     if (!imageUri) {
       console.error('No image URI to send');
       return;
@@ -68,15 +43,15 @@ export const useOcrLogic = () => {
         body: formData,
       });
       const data = await response.json();
-      setApiResponse(data );
       console.log('API Response:', data);
     } catch (error) {
       console.error('Error sending image:', error);
     }
   };
 
+
   return {
-    pickImage,
-    takePicture
+    handlePickImage,
+    handleTakePicture
   };
 };
