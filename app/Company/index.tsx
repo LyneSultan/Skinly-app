@@ -2,26 +2,27 @@ import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { useEffect, useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { style } from "./style";
 import { useCompanyLogic } from "./useCompanyLogic";
 
 const Company = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { fetchData, setData, data } = useCompanyLogic();
+  const { fetchData, setData, page, setPage, data } = useCompanyLogic();
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const fetchedData = await fetchData();
+        console.log(page);
+        const fetchedData = await fetchData(page);
         setData(fetchedData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     getData();
-  }, []);
+  }, [page]);
 
   return (
     <ScrollView>
@@ -54,6 +55,13 @@ const Company = () => {
                 <Text>Loading products...</Text>
               )}
             </View>
+            <TouchableOpacity style={base.alignCenter}
+              onPress={async () => {
+                const current = page + 1;
+                setPage(current);
+              }} >
+              <Text >View More</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
