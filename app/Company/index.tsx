@@ -2,7 +2,7 @@ import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { useCompanyLogic } from "./useCompanyLogic";
 
@@ -38,9 +38,18 @@ const Company = () => {
 
         <View >
           {data.length > 0 ? (
-            data.map((d) => (
+            data.map((product) => (
               <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]} >
-                <Text>{d.name}</Text>
+
+                <View >
+                  <Image
+                    source={{ uri: product.image }}
+
+                  />
+                  <Text numberOfLines={2} ellipsizeMode="tail">
+                    {product.name}
+                  </Text>
+                </View>
               </View>
             ))
           ) : (<Text>Loading products...</Text>)}
