@@ -22,8 +22,22 @@ export const useOcrLogic = () => {
       setImageUri(result.assets[0].uri);
     }
   };
+  const takePicture = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
+    if (!permissionResult.granted) {
+      alert('Permission to access camera is required!');
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync();
+
+    if (!result.canceled && result.assets.length > 0) {
+      setImageUri(result.assets[0].uri);
+    }
+  };
   return {
     pickImage,
+    takePicture
   };
 };
