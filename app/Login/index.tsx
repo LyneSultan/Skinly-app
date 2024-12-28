@@ -1,51 +1,14 @@
 import ButtonComponent from "@/components/base/Button"
 import { Input } from "@/components/base/Input"
-import { routes } from "@/routes/server.routes"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import axios from 'axios'
-import { Link, router } from "expo-router"
-import { useState } from "react"
+import { Link } from "expo-router"
 import { Text, View } from "react-native"
 import { style } from "./style"
+import { useLoginLogic } from "./useLoginLogic"
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleEmailChange = (text: string) => {
-    setEmail(text);
-  };
-
-  const handlePasswordChange = (text: string) => {
-    setPassword(text);
-  };
-
-  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  const handleLogin = async () => {
-    const payload = {
-      email,
-      password,
-    };
-
-    try {
-      const response = await axios.post(apiUrl + routes.login, payload, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const token = response.data.access_token;
-
-      await AsyncStorage.setItem('authToken', token);
-
-      const storedToken = await AsyncStorage.getItem('authToken');
-      console.log('Stored Token:', storedToken);
-      router.push('/(tabs)/HomeScreen')
-    } catch (error) {
-      console.error('Error Data:', error.response.data.message);
-    };
-  }
+  const { setEmail, setPassword, handleLogin } = useLoginLogic();
 
   return (
     <View style={[base.flex, base.alignCenter, base.default]}>
@@ -56,8 +19,8 @@ const Login = () => {
         </View>
 
         <View style={style.loginForm}>
-          <Input label="Email" text="Enter your email" onChangeText={handleEmailChange}> </Input>
-          <Input label="password" text="Enter your password" password={true} onChangeText={handlePasswordChange}></Input>
+          <Input label="Email" text="Enter your email" onChangeText={(email) => setEmail(email)}> </Input>
+          <Input label="password" text="Enter your password" password={true} onChangeText={(password) => setPassword(password)}></Input>
         </View>
 
         <View style={base.flex}>
