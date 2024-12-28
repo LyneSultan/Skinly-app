@@ -1,47 +1,23 @@
+import { PickImage } from '@/hooks/ImagePicker/pickImage';
+import { TakePicture } from '@/hooks/ImagePicker/takePicture';
 import { routes } from '@/routes/server.routes';
-import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 
 export const useSkinPageLogic = () => {
-  const [imageUri, setImageUri] = useState<string | null>(null);
   const [apiResponse, setApiResponse] = useState<any>(null);
+  const { pickImage } = PickImage();
+  const { takePicture } = TakePicture();
 
-  const pickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  const handlePickImage = async () => {
+    const imageUri = await pickImage();
+    sendImageToApi(imageUri);
+  }
+  const handleTakePicture = async () => {
+    const imageUri = await takePicture();
+    sendImageToApi(imageUri);
+  }
 
-    if (!permissionResult.granted) {
-      alert('Permission to access gallery is required!');
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-    });
-
-    if (!result.canceled && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri);
-      sendImageToApi(result.assets[0].uri);
-    }
-  };
-
-  const takePicture = async () => {
-    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-
-    if (!permissionResult.granted) {
-      alert('Permission to access camera is required!');
-      return;
-    }
-
-    const result = await ImagePicker.launchCameraAsync();
-
-    if (!result.canceled && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri);
-      const response =await sendImageToApi(result.assets[0].uri);
-    }
-  };
-
-  const sendImageToApi = async (imageUri: string | null) => {
+  const sendImageToApi = async (imageUri: string | undefined) => {
     if (!imageUri) {
       console.error('No image URI to send');
       return;
@@ -78,9 +54,8 @@ export const useSkinPageLogic = () => {
   };
 
   return {
-    pickImage,
-    takePicture,
-    setImageUri,
+    handlePickImage,
+    handleTakePicture,
     apiResponse,
   };
 };
