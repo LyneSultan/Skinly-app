@@ -1,3 +1,4 @@
+import { routes } from '@/routes/server.routes';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 
@@ -15,14 +16,12 @@ export const useSkinPageLogic = () => {
 
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
     if (!result.canceled && result.assets.length > 0) {
-
       setImageUri(result.assets[0].uri);
+      sendImageToApi(result.assets[0].uri);
     }
   };
 
@@ -34,18 +33,12 @@ export const useSkinPageLogic = () => {
       return;
     }
 
-    const result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+    const result = await ImagePicker.launchCameraAsync();
 
     if (!result.canceled && result.assets.length > 0) {
       setImageUri(result.assets[0].uri);
       const response =await sendImageToApi(result.assets[0].uri);
     }
-
-
   };
 
   const sendImageToApi = async (imageUri: string | null) => {
@@ -53,29 +46,22 @@ export const useSkinPageLogic = () => {
       console.error('No image URI to send');
       return;
     }
-
     try {
       const localUri = imageUri;
       const filename = localUri.split('/').pop();
       const match = /\.(\w+)$/.exec(filename ?? '');
       const type = match ? `image/${match[1]}` : 'image';
 
-      console.log('Preparing file for upload:', {
-        uri: localUri,
-        name: filename,
-        type: type,
-      });
-
       const formData = new FormData();
-      formData.append('file', {
+      formData.append('image', {
         uri: localUri,
         name: filename,
         type: type,
       } as any);
 
-      const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = process.env.EXPO_PUBLIC_API_URL;
       console.log(apiUrl);
-      const response = await fetch('http://192.168.248.239:3000/admin/', {
+      const response = await fetch(apiUrl+routes.skinDetection, {
         method: 'POST',
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -84,7 +70,7 @@ export const useSkinPageLogic = () => {
       });
 
       const data = await response.json();
-      setApiResponse(data.result || 'Success!');
+      setApiResponse(data);
       console.log('API Response:', data);
     } catch (error) {
       console.error('Error sending image:', error);
