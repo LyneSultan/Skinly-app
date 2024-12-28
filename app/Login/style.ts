@@ -16,7 +16,10 @@ export const style = StyleSheet.create({
   },
   login: {
     color: colors.primary,
-  }
+  },
+  errorText: {
+    color:colors.error
+  },
 
 
 })
