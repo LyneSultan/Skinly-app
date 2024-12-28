@@ -60,13 +60,26 @@ const Company = () => {
                 <Text>Loading products...</Text>
               )}
             </View>
-            <TouchableOpacity style={base.alignCenter}
-              onPress={async () => {
-                const current = page + 1;
-                setPage(current);
-              }} >
-              <Text >View More</Text>
-            </TouchableOpacity>
+            <View style={[base.flex, base.row, base.spaceAround]}>
+              <TouchableOpacity
+                onPress={async () => {
+                  if (page > 1) {
+                    const current = page - 1;
+                    setPage(current);
+                  }
+                }}>
+                <Text>Previous</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={async () => {
+                  const current = page + 1;
+                  setPage(current);
+                }}>
+                <Text >Next</Text>
+              </TouchableOpacity>
+            </View>
+
           </View>
         </View>
       </View>
