@@ -2,8 +2,9 @@ import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { useEffect, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { Searchbar } from "react-native-paper";
+import { style } from "./style";
 import { useCompanyLogic } from "./useCompanyLogic";
 
 const Company = () => {
@@ -22,41 +23,42 @@ const Company = () => {
     getData();
   }, []);
 
-
   return (
-    <View style={[base.default]}>
-      <View style={[base.gap]}>
-        <Text style={[typography.h1]}>Promote your products to users effectively</Text>
-        <Searchbar
-          value={searchQuery}
-          onChangeText={(text) => { setSearchQuery(text) }}
-          placeholder="Enter the product name"
-          style={{ backgroundColor: colors.primary }} />
+    <ScrollView>
+      <View style={[base.default]}>
+        <View style={[base.gap]}>
+          <Text style={[typography.h1]}>Promote your products to users effectively</Text>
+          <Searchbar
+            value={searchQuery}
+            onChangeText={(text) => { setSearchQuery(text) }}
+            placeholder="Enter the product name"
+            style={{ backgroundColor: colors.primary }} />
 
+          <Text style={typography.h2}>Products</Text>
 
-        <Text style={typography.h2}>Products</Text>
-
-        <View >
-          {data.length > 0 ? (
-            data.map((product) => (
-              <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]} >
-
-                <View >
-                  <Image
-                    source={{ uri: product.image }}
-
-                  />
-                  <Text numberOfLines={2} ellipsizeMode="tail">
-                    {product.name}
-                  </Text>
-                </View>
-              </View>
-            ))
-          ) : (<Text>Loading products...</Text>)}
+          <View>
+            <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
+              {data.length > 0 ? (
+                data.map((product) => (
+                  <View key={product.name} style={[style.productCard]}>
+                    <Image
+                      source={{ uri: product.image }}
+                      style={[style.productImage, base.borderRadius]}
+                    />
+                    <Text style={[style.text]} numberOfLines={2} ellipsizeMode="tail">
+                      {product.name}
+                    </Text>
+                  </View>
+                )
+                )) : (
+                <Text>Loading products...</Text>
+              )}
+            </View>
+          </View>
         </View>
-
       </View>
-    </View>
-  )
-}
+    </ScrollView>
+  );
+};
+
 export default Company;
