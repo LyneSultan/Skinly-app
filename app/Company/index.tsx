@@ -1,6 +1,7 @@
 import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
+import { Link, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Searchbar } from "react-native-paper";
@@ -10,7 +11,7 @@ import { useCompanyLogic } from "./useCompanyLogic";
 const Company = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { fetchData, setData, page, setPage, data } = useCompanyLogic();
-
+  const router = useRouter();
   useEffect(() => {
     const getData = async () => {
       try {
@@ -41,15 +42,19 @@ const Company = () => {
             <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
               {data.length > 0 ? (
                 data.map((product) => (
-                  <View key={product.name} style={[style.productCard]}>
-                    <Image
-                      source={{ uri: product.image }}
-                      style={[style.productImage, base.borderRadius]}
-                    />
-                    <Text style={[style.text]} numberOfLines={2} ellipsizeMode="tail">
-                      {product.name}
-                    </Text>
-                  </View>
+                  <Link href={'/AddAdvertisement'} style={[style.productsContainer]}>
+
+                    <View key={product.name} style={[style.productCard]} >
+                      <Image
+                        source={{ uri: product.image }}
+                        style={[style.productImage, base.borderRadius]}
+                      />
+                      <Text style={[style.text]} numberOfLines={2} ellipsizeMode="tail">
+                        {product.name}
+                      </Text>
+                    </View>
+                  </Link>
+
                 )
                 )) : (
                 <Text>Loading products...</Text>
