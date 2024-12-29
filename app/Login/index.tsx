@@ -25,12 +25,14 @@ const Login = () => {
 
         <View style={base.flex}>
           <View style={style.forgetPassword}>
-            <Text>Forgot Password?</Text>
+            <Link href="/ForgetPassword">
+              <Text>Forgot Password?</Text>
+            </Link>
           </View>
         </View>
 
         {errorMessages.length > 0 && (
-          <View > 
+          <View >
             {errorMessages.map((msg, index) => (
               <Text key={index} style={style.errorText}>
                 * {msg}
