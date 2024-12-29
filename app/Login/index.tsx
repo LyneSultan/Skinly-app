@@ -30,9 +30,9 @@ const Login = () => {
         </View>
 
         {errorMessages.length > 0 && (
-          <View >
-            {errorMessages.map((msg) => (
-              <Text style={style.errorText}>
+          <View > 
+            {errorMessages.map((msg, index) => (
+              <Text key={index} style={style.errorText}>
                 * {msg}
               </Text>
             ))}
