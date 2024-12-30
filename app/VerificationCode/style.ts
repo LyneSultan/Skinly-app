@@ -16,7 +16,6 @@ export const style = StyleSheet.create(
       textAlign: 'center',
       fontSize: 20,
       borderRadius: 10,
-      marginHorizontal: 5,
       backgroundColor: '#f5f5f5',
     },
   }
