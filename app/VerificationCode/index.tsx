@@ -1,10 +1,23 @@
-import { View } from "react-native";
+import { base } from '@/style/base';
+import React from 'react';
+import { Image, Text, TextInput, View } from 'react-native';
 
-const VerificationCode = () => {
+const VerificationCodePage = () => {
+
   return (
-    <View>
 
+    <View style={[base.default]} >
+      <View style={[base.flex, base.column]}>
+        <View style={base.alignCenter}>
+          <Image source={require('@/assets/images/verificationCode.png')} style={{ width: "90%", height: 300 }} />
+        </View>
+        <Text >Enter Verification Code</Text>
+        <View>
+          <TextInput keyboardType="numeric" />
+        </View>
+      </View>
     </View>
-  )
+
+  );
 }
-export default VerificationCode;
+export default VerificationCodePage;
