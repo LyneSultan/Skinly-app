@@ -5,18 +5,18 @@ import { View } from 'react-native';
 import { useOcrLogic } from './useOcrLogic';
 
 const Ocr = () => {
-  const { pickImage, takePicture } = useOcrLogic();
+  const { handleTakePicture, handlePickImage } = useOcrLogic();
 
   return (
     <View style={[base.flex, base.default]}>
       <View style={[base.gap]}>
 
         <View>
-          <ButtonComponent text='Take picture' onPress={takePicture} />
+          <ButtonComponent text='Take picture' onPress={handleTakePicture} />
         </View>
 
         <View>
-          <ButtonComponent text='Upload picture' mode='outlined' onPress={pickImage} />
+          <ButtonComponent text='Upload picture' mode='outlined' onPress={handlePickImage} />
         </View>
 
       </View>

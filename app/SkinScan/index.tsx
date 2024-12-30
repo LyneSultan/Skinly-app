@@ -8,7 +8,7 @@ import { style } from './style';
 import { useSkinPageLogic } from './useSkinPageLogic';
 
 const SkinScan = () => {
-  const { pickImage, takePicture, apiResponse } = useSkinPageLogic();
+  const { handlePickImage, handleTakePicture, apiResponse } = useSkinPageLogic();
 
   return (
     <View style={[base.flex, base.default]}>
@@ -30,11 +30,11 @@ const SkinScan = () => {
         </View>
 
         <View>
-          <ButtonComponent text='Take picture' onPress={takePicture} />
+          <ButtonComponent text='Take picture' onPress={handleTakePicture} />
         </View>
 
         <View>
-          <ButtonComponent text='Upload picture' mode='outlined' onPress={pickImage} />
+          <ButtonComponent text='Upload picture' mode='outlined' onPress={handlePickImage} />
         </View>
 
         {apiResponse && (
