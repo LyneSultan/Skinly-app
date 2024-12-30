@@ -1,17 +1,29 @@
-import { fetch } from 'expo/fetch';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { useState } from 'react';
 
 const pageSize = 6;
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export const useCompanyLogic = () => {
   const [data, setData] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
+
  const fetchData = async (page:number) => {
    try {
-     const response = await fetch(`http://192.168.248.239:3000/product/676aae016da6361b6404a87f?page=${page}&pageSize=6`);
-     const data = await response.json();
-     console.log(data);
-    return data.products;
+     const TOKEN=await AsyncStorage.getItem('authToken');
+
+     const response = await axios.get(`${apiUrl}/product/company`, {
+      headers: {
+        Authorization: TOKEN,
+      },
+      params: {
+        page,
+        pageSize,
+      },
+     });
+     console.log(response.data);
+     return response.data.products;
 
   } catch (error) {
     console.error(error);
