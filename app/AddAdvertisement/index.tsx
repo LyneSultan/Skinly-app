@@ -1,8 +1,14 @@
-import { Text } from "react-native";
+import { useSearchParams } from "expo-router/build/hooks";
+import { Text, View } from "react-native";
 
 const AddvertisementPage = () => {
+  const productName = useSearchParams(); // Retrieve the productName query parameter
   return (
-    <Text>Adds</Text>
+
+
+    <View>
+      <Text>Add Advertisement for: {productName}</Text>
+    </View>
   )
 }
 export default AddvertisementPage;

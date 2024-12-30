@@ -17,6 +17,7 @@ const Company = () => {
       try {
         console.log(page);
         const fetchedData = await fetchData(page);
+        // console.log(fetchData);
         setData(fetchedData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -42,7 +43,7 @@ const Company = () => {
             <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
               {data.length > 0 ? (
                 data.map((product) => (
-                  <Link href={'/AddAdvertisement'} style={[style.productsContainer]}>
+                  <Link href={`/AddAdvertisement?${product.name}`} style={[style.productsContainer]}>
 
                     <View key={product.name} style={[style.productCard]} >
                       <Image
