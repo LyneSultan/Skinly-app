@@ -6,12 +6,7 @@ export const style = StyleSheet.create(
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 20,
-    },
-
-    inputContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      width: '80%',
+      textAlign: "center"
     },
     inputBox: {
       width: 50,
