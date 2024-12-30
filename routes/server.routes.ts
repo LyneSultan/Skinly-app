@@ -1,6 +1,6 @@
 export const routes = {
   login: "/auth/login",
-  register: "/users/register",
+  register: "/auth/register",
   skinDetection: "/skinDetection",
   ocr:"/ocr"
 

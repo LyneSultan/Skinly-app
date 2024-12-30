@@ -25,21 +25,23 @@ const Register = () => {
           <Input label="password" text="enter your password" password={true} onChangeText={(value) => setPassword(value)} />
           <Input label="Confirm password" text="enter your password again" onChangeText={(value) => setPasswordConfirmation(value)} />
         </View>
-        <ButtonComponent mode="contained" text="Register" onPress={handleRegister} />
 
-
-        <View style={[base.flex, base.row, base.justifyCenter]}>
-          <Text>Already have an account?  <Link href={"/Login"}><Text style={[style.register, typography.bold]}>Login</Text> </Link> </Text>
-        </View>
         {errorMessages.length > 0 && (
           <View >
-            {errorMessages.map((msg) => (
-              <Text style={[style.error]}>
+            {errorMessages.map((msg, index) => (
+              <Text key={index} style={style.error}>
                 * {msg}
               </Text>
             ))}
           </View>
         )}
+
+        <ButtonComponent mode="contained" text="Register" onPress={handleRegister} />
+
+        <View style={[base.flex, base.row, base.justifyCenter]}>
+          <Text>Already have an account?  <Link href={"/Login"}><Text style={[style.register, typography.bold]}>Login</Text> </Link> </Text>
+        </View>
+
 
       </View>
     </View>
