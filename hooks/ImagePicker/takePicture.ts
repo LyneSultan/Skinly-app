@@ -10,7 +10,9 @@ export const TakePicture =  () => {
       return;
     }
 
-    const result = await ImagePicker.launchCameraAsync();
+    const result = await ImagePicker.launchCameraAsync({ quality: 1,
+      allowsEditing: true,
+      aspect: [1, 1],});
 
     if (!result.canceled && result.assets.length > 0) {
      return result.assets[0].uri;

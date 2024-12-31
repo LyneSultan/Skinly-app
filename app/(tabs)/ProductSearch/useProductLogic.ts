@@ -1,14 +1,15 @@
 import { Linking } from "react-native";
 
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 export const useProductLogic = () => {
   const getProduct = async (productName:string|string[]) => {
     try {
-      const response = await fetch(`http://192.168.248.239:3000/product/common/${productName}`);
+      const response = await fetch(`${apiUrl}/product/common/${productName}`);
 
       if (!response.ok) {
         return [];
       }
-      
+
       const data = await response.json();
       return data;
     } catch (error) {

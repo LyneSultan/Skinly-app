@@ -1,18 +1,27 @@
 import { PickImage } from '@/hooks/ImagePicker/pickImage';
 import { TakePicture } from '@/hooks/ImagePicker/takePicture';
 import { routes } from '@/routes/server.routes';
+import { useState } from 'react';
 
 export const useOcrLogic = () => {
-
+  const [loading, setLoading] = useState(false);
+  const [apiResponse, setApiResponse] = useState(null);
   const { pickImage } = PickImage();
   const { takePicture } = TakePicture();
 
   const handlePickImage = async () => {
     const imageUri = await pickImage();
+    setLoading(true);
+
+    console.log("here",imageUri);
+
     sendToApi(imageUri);
   }
   const handleTakePicture = async () => {
     const imageUri = await takePicture();
+    setLoading(true);
+
+    console.log("here",imageUri);
     sendToApi(imageUri);
   }
 
@@ -43,7 +52,9 @@ export const useOcrLogic = () => {
         body: formData,
       });
       const data = await response.json();
+      setLoading(false);
       console.log('API Response:', data);
+      setApiResponse(data);
     } catch (error) {
       console.error('Error sending image:', error);
     }
@@ -51,7 +62,10 @@ export const useOcrLogic = () => {
 
 
   return {
+    apiResponse,
     handlePickImage,
-    handleTakePicture
+    handleTakePicture,
+    setLoading,
+    loading
   };
 };
