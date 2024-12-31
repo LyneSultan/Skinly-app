@@ -3,6 +3,7 @@ import { typography } from "@/style/typography";
 import { Link, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import PagerView from 'react-native-pager-view';
 import { style } from "./style";
 import { useHomeLogic } from "./useHomeLogic";
 
@@ -41,15 +42,18 @@ const HomeScreen = () => {
           <Text style={[typography.h2]}> Let’s take care of your skin!</Text>
 
           {ads.length > 0 && (
-            <View>
+            <PagerView style={{
+              width: '100%',
+              height: 200,
+            }} initialPage={0}>
               {ads.map((ad, index) => (
                 <Image
                   key={index}
                   source={{ uri: `http://192.168.10.128:3000/${ad}` }}
-                  style={{ width: 100, height: 100, marginVertical: 10 }}
+                  style={{ width: '100%', height: 200 }}
                 />
               ))}
-            </View>
+            </PagerView>
           )}
 
           <View style={[style.scanContainer, base.flex, base.row, base.spaceBetween, base.alignCenter]}>
