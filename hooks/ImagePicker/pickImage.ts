@@ -12,6 +12,8 @@ export const PickImage = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 1,
+      allowsEditing: true,
+      aspect: [1, 1],
     });
 
     if (!result.canceled && result.assets.length > 0) {
