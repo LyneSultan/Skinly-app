@@ -3,7 +3,7 @@ import RequirementItem from '@/components/RequirementCard';
 import { base } from '@/style/base';
 import { typography } from '@/style/typography';
 import React from 'react';
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { style } from './style';
 import { useSkinPageLogic } from './useSkinPageLogic';
 
@@ -38,7 +38,20 @@ const SkinScan = () => {
         </View>
 
         {apiResponse && (
-          <Text>{typeof apiResponse === 'object' ? JSON.stringify(apiResponse) : apiResponse}</Text>
+          <>
+            {apiResponse.error && (
+              <Text>Retry</Text>
+            )}
+            {apiResponse.class === 'dry' ? (
+              <View style={[base.flex, base.row]}>
+                <Text>Your skin type is Dry</Text>
+                <Image source={require('@/assets/images/Dry.png')} style={{ width: 65 }} />
+              </View>
+
+            ) : (
+              <Text>{apiResponse.class}</Text>
+            )}
+          </>
         )}
 
       </View>
