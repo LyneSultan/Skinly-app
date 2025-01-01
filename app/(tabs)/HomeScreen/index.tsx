@@ -49,8 +49,10 @@ const HomeScreen = () => {
               {ads.map((ad, index) => (
                 <Image
                   key={index}
-                  source={{ uri: `http://192.168.10.128:3000/${ad}` }}
-                  style={{ width: '100%', height: 200 }}
+                  source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${ad}` }}
+                  style={{
+                    width: '100%', height: 200, borderRadius: 20,
+                  }}
                 />
               ))}
             </PagerView>
@@ -69,12 +71,14 @@ const HomeScreen = () => {
           <View >
             {data.length > 0 ? (
 
-              data.map((d) => (
-                <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]} >
-                  {d.products?.map((product) => (
+              data.map((d, index) => (
+                <View
+                  key={index}
+                  style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
+                  {d.products?.map((product, productIndex) => (
                     <Link
-                      key={product.name}
-                      href={`/ProductSearch/${encodeURIComponent(product.name)}`}
+                      key={productIndex}
+                      href={`/ProductSearch/${product.name}`}
                       style={[style.productsContainer]}>
                       <View style={[style.productCard]}>
                         <Image
@@ -87,7 +91,6 @@ const HomeScreen = () => {
                       </View>
                     </Link>
                   ))}
-
                 </View>
               ))
             ) : (<Text>Loading products...</Text>)}
