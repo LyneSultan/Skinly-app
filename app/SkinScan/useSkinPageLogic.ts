@@ -10,10 +10,13 @@ export const useSkinPageLogic = () => {
 
   const handlePickImage = async () => {
     const imageUri = await pickImage();
-    sendImageToApi(imageUri);
+    if (imageUri) {
+      sendImageToApi(imageUri);
+    }
   }
   const handleTakePicture = async () => {
     const imageUri = await takePicture();
+    
     sendImageToApi(imageUri);
   }
 

@@ -10,10 +10,10 @@ export const style = StyleSheet.create({
     ...base.borderRadius
   },
   productContainer: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.rose,
+    marginBottom:10,
+    padding: 10,
     width: "47%",
-    height:300,
-    padding: 20,
     ...base.borderRadius
   },
   productImage: {
