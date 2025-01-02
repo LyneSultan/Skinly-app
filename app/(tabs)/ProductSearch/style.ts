@@ -4,16 +4,13 @@ import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
   searchBar: {
-    padding: 10,
-    height:45,
-    backgroundColor: colors.rose,
-    ...base.borderRadius
+    borderRadius:40,
+    backgroundColor: colors.primary
   },
   productContainer: {
-    backgroundColor: colors.rose,
     marginBottom:10,
-    padding: 10,
     width: "47%",
+    padding:5,
     ...base.borderRadius
   },
   productImage: {
@@ -24,5 +21,8 @@ export const style = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius:40
+  },
+  notFoundText: {
+     color: colors.primary, fontSize: 16
   }
 })
