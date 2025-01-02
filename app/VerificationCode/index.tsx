@@ -9,31 +9,27 @@ const VerificationCodePage = () => {
   const router = useRouter();
   return (
     <KeyboardAwareScrollView>
-
       <View style={[base.default]} >
+
         <View style={[base.flex, base.column, base.gap]}>
           <View style={base.alignCenter}>
-            <Image source={require('@/assets/images/verificationCode.png')} style={{ width: "90%", height: 300 }} />
+            <Image source={require('@/assets/images/verificationCode.png')} style={style.image} />
           </View>
           <Text style={style.header}>Enter Verification Code</Text>
+
           <View style={[base.flex, base.row, base.justifyCenter, base.gap]}>
             <TextInput keyboardType="numeric" style={style.inputBox} maxLength={1} />
             <TextInput keyboardType="numeric" style={style.inputBox} maxLength={1} />
             <TextInput keyboardType="numeric" style={style.inputBox} maxLength={1} />
             <TextInput keyboardType="numeric" style={style.inputBox} maxLength={1} />
+          </View>
 
-          </View>
-          <View>
-            <Text style={[{ textAlign: "center" }]}>Don’t receive code ? Re-send</Text>
-          </View>
-          <View>
-            <ButtonComponent text='Submit' onPress={() => { router.push('/PasswordReset') }} />
-          </View>
+          <Text style={style.resendText} >Don’t receive code ? Re-send</Text>
+
+          <ButtonComponent text='Submit' onPress={() => { router.push('/PasswordReset') }} />
         </View>
       </View>
-    </KeyboardAwareScrollView>
-
-
+    </KeyboardAwareScrollView >
   );
 }
 export default VerificationCodePage;

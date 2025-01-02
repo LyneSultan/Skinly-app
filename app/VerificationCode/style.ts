@@ -5,8 +5,10 @@ export const style = StyleSheet.create(
     header: {
       fontSize: 24,
       fontWeight: 'bold',
-      marginBottom: 20,
       textAlign: "center"
+    },
+    image: {
+      width: "90%", height: 300
     },
     inputBox: {
       width: 50,
@@ -18,5 +20,8 @@ export const style = StyleSheet.create(
       borderRadius: 10,
       backgroundColor: '#f5f5f5',
     },
+    resendText: {
+      textAlign:"center"
+    }
   }
 )
