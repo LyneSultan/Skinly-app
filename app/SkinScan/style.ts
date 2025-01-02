@@ -12,10 +12,10 @@ export const style = StyleSheet.create({
   requirementCard: {
     minHeight:250,
     backgroundColor: colors.primary,
-    padding: 20,
+    padding: '8%',
     shadowColor: '#000000',
     elevation: 5,
     ...base.borderRadius,
-    marginVertical:20
+    gap: '15%'
   }
 });
