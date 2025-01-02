@@ -1,8 +1,8 @@
 import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
-import { Link, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { Link } from "expo-router";
+import { useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { style } from "./style";
@@ -10,21 +10,7 @@ import { useCompanyLogic } from "./useCompanyLogic";
 
 const Company = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { fetchData, setData, page, setPage, data } = useCompanyLogic();
-  const router = useRouter();
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        console.log(page);
-        const fetchedData = await fetchData(page);
-        // console.log(fetchData);
-        setData(fetchedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    getData();
-  }, [page]);
+  const { page, nextHandle, previousHandle, data } = useCompanyLogic();
 
   return (
     <ScrollView>
@@ -42,10 +28,10 @@ const Company = () => {
           <View>
             <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
               {data.length > 0 ? (
-                data.map((product) => (
-                  <Link href={`/AddAdvertisement?${product.name}`} style={[style.productsContainer]}>
+                data.map((product, index) => (
+                  <Link href={`/AddAdvertisement?${product.name}`} style={[style.productsContainer]} key={index}>
 
-                    <View key={product.name} style={[style.productCard]} >
+                    <View style={[style.productCard]} >
                       <Image
                         source={{ uri: product.image }}
                         style={[style.productImage, base.borderRadius]}
@@ -55,28 +41,17 @@ const Company = () => {
                       </Text>
                     </View>
                   </Link>
-
                 )
                 )) : (
                 <Text>Loading products...</Text>
               )}
             </View>
             <View style={[base.flex, base.row, base.spaceAround]}>
-              <TouchableOpacity
-                onPress={async () => {
-                  if (page > 1) {
-                    const current = page - 1;
-                    setPage(current);
-                  }
-                }}>
+              <TouchableOpacity onPress={previousHandle}>
                 <Text>Previous</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={async () => {
-                  const current = page + 1;
-                  setPage(current);
-                }}>
+              <TouchableOpacity onPress={nextHandle}>
                 <Text >Next</Text>
               </TouchableOpacity>
             </View>
