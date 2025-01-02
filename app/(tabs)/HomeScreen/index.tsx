@@ -1,38 +1,13 @@
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
-import { Link, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { Link } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import PagerView from 'react-native-pager-view';
 import { style } from "./style";
 import { useHomeLogic } from "./useHomeLogic";
 
 const HomeScreen = () => {
-  const { fetchData, setData, data, page, setPage } = useHomeLogic();
-  const router = useRouter();
-  const [ads, setAds] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const fetchedData = await fetchData();
-        setData(fetchedData);
-
-        const newAds = [];
-        fetchedData.forEach((d) =>
-          d.products?.forEach((product) => {
-            if (product.additional_info) {
-              newAds.push(product.additional_info.advertisement);
-            }
-          })
-        );
-        setAds(newAds);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    getData();
-  }, []);
+  const { data, ads, viewMore } = useHomeLogic();
 
   return (
     <ScrollView>
@@ -42,18 +17,11 @@ const HomeScreen = () => {
           <Text style={[typography.h2]}> Let’s take care of your skin!</Text>
 
           {ads.length > 0 && (
-            <PagerView style={{
-              width: '100%',
-              height: 200,
-            }} initialPage={0}>
+            <PagerView style={style.carousel} initialPage={0}>
               {ads.map((ad, index) => (
-                <Image
-                  key={index}
+                <Image key={index}
                   source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${ad}` }}
-                  style={{
-                    width: '100%', height: 200, borderRadius: 20,
-                  }}
-                />
+                  style={[style.carousel, base.borderRadius]} />
               ))}
             </PagerView>
           )}
@@ -68,48 +36,28 @@ const HomeScreen = () => {
 
           <Text style={typography.h2}>Products</Text>
 
-          <View >
-            {data.length > 0 ? (
+          {data.length > 0 ? (
+            data.map((d, index) => (
+              <View key={index} style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
+                {d.products?.map((product, productIndex) => (
+                  <Link key={productIndex} href={`/ProductSearch/${product.name}`} style={[style.productsContainer]}>
+                    <View style={[style.productCard]}>
+                      <Image source={{ uri: product.image }} style={[style.productImage, base.borderRadius]} />
+                      <Text style={[style.text]} numberOfLines={2} ellipsizeMode="tail">
+                        {product.name}
+                      </Text>
+                    </View>
+                  </Link>
+                ))}
+              </View>
+            ))
+          ) : (<Text>Loading products...</Text>)}
 
-              data.map((d, index) => (
-                <View
-                  key={index}
-                  style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
-                  {d.products?.map((product, productIndex) => (
-                    <Link
-                      key={productIndex}
-                      href={`/ProductSearch/${product.name}`}
-                      style={[style.productsContainer]}>
-                      <View style={[style.productCard]}>
-                        <Image
-                          source={{ uri: product.image }}
-                          style={[style.productImage, base.borderRadius]}
-                        />
-                        <Text style={[style.text]} numberOfLines={2} ellipsizeMode="tail">
-                          {product.name}
-                        </Text>
-                      </View>
-                    </Link>
-                  ))}
-                </View>
-              ))
-            ) : (<Text>Loading products...</Text>)}
-
-          </View>
-        </View>
-
-        <View>
-          <TouchableOpacity style={base.alignCenter}
-            onPress={async () => {
-              const current = page + 1;
-              setPage(current);
-              const products = await fetchData(current);
-              setData((prev) => [...prev, ...products]);
-            }} >
-            <Text >View More</Text>
+          <TouchableOpacity style={base.alignCenter} onPress={viewMore} >
+            <Text>View More</Text>
           </TouchableOpacity>
-        </View>
 
+        </View>
       </View>
     </ScrollView >
   );
