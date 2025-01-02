@@ -5,11 +5,7 @@ import { ActivityIndicator, Text, View } from 'react-native';
 import { useOcrLogic } from './useOcrLogic';
 
 const Ocr = () => {
-  const { apiResponse, handleTakePicture, handlePickImage, loading, setLoading } = useOcrLogic();
-
-  const handleWithLoading = async (action: any) => {
-    await action();
-  };
+  const { apiResponse, handleTakePicture, handlePickImage, loading } = useOcrLogic();
 
   return (
     <View style={[base.flex, base.default]}>
@@ -18,7 +14,7 @@ const Ocr = () => {
         <View>
           <ButtonComponent
             text="Take picture"
-            onPress={() => handleWithLoading(handleTakePicture)}
+            onPress={() => handleTakePicture}
           />
         </View>
 
@@ -26,7 +22,7 @@ const Ocr = () => {
           <ButtonComponent
             text="Upload picture"
             mode="outlined"
-            onPress={() => handleWithLoading(handlePickImage)}
+            onPress={() => handlePickImage}
           />
         </View>
 
