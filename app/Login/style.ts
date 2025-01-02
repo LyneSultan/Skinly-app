@@ -8,6 +8,9 @@ export const style = StyleSheet.create({
     gap: 20,
     width:"100%"
   },
+  loginImage: {
+    width: "90%", height: 120
+  },
   loginForm: {
     gap:10
   },

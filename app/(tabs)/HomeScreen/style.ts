@@ -26,5 +26,9 @@ export const style = StyleSheet.create({
   productImage: {
     width: "100%",
     height: 150,
+  },
+  carousel: {
+    width: '100%',
+    height: 200
   }
 });
