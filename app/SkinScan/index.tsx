@@ -1,14 +1,21 @@
+import { colors } from '@/colors/colors';
 import ButtonComponent from '@/components/base/Button';
 import RequirementItem from '@/components/RequirementCard';
 import { base } from '@/style/base';
 import { typography } from '@/style/typography';
 import React from 'react';
 import { Image, Text, View } from "react-native";
+import { ActivityIndicator } from 'react-native-paper';
 import { style } from './style';
 import { useSkinPageLogic } from './useSkinPageLogic';
 
 const SkinScan = () => {
-  const { handlePickImage, handleTakePicture, apiResponse } = useSkinPageLogic();
+  const { handlePickImage, handleTakePicture, apiResponse, loading } = useSkinPageLogic();
+  const imageMap = {
+    dry: require('@/assets/images/dry.png'),
+    oily: require('@/assets/images/oily.png'),
+    normal: require('@/assets/images/normal.png'),
+  };
 
   return (
     <View style={[base.flex, base.default]}>
@@ -26,23 +33,43 @@ const SkinScan = () => {
           </View>
         </View>
 
-        <ButtonComponent text='Take picture' onPress={handleTakePicture} />
+        <ButtonComponent text='Take picture' onPress={handleTakePicture} disabled={loading} />
 
-        <ButtonComponent text='Upload picture' mode='outlined' onPress={handlePickImage} />
+        <ButtonComponent text='Upload picture' mode='outlined' onPress={handlePickImage} disabled={loading} />
+        {loading && (
+          <ActivityIndicator size="large" color='#D16F9A' style={{ marginTop: 20 }} />
+        )}
 
         {apiResponse && (
           <>
             {apiResponse.error && (
-              <Text>An error occured please retry again</Text>
+              <Text style={{ color: 'red', fontSize: 16, textAlign: 'center', marginBottom: 10 }}>
+                An error occurred. Please retry again.
+              </Text>
             )}
-            {apiResponse.class === 'dry' ? (
-              <View style={[base.flex, base.row]}>
-                <Text>Your skin type is Dry</Text>
-                <Image source={require('@/assets/images/Dry.png')} style={{ width: 65 }} />
+            {apiResponse.class && (
+              <View
+                style={[
+                  base.flex,
+                  base.row,
+                  { backgroundColor: '#F0F0F0', padding: 15, borderRadius: 10, alignItems: 'center', marginBottom: 15 },
+                ]}
+              >
+                <Text style={{ fontSize: 18, fontWeight: 'bold', flex: 1 }}>
+                  Your skin type is{' '}
+                  <Text style={{ color: colors.primary }}>
+                    {apiResponse.class.charAt(0).toUpperCase() + apiResponse.class.slice(1)}
+                  </Text>
+                </Text>
+                {imageMap[apiResponse.class] ? (
+                  <Image
+                    source={imageMap[apiResponse.class]}
+                    style={{ width: 60, height: 60, resizeMode: 'contain', marginLeft: 10 }}
+                  />
+                ) : (
+                  <Text>No image available</Text>
+                )}
               </View>
-
-            ) : (
-              <Text>{apiResponse.class}</Text>
             )}
           </>
         )}
