@@ -7,17 +7,20 @@ export const useSkinPageLogic = () => {
   const [apiResponse, setApiResponse] = useState<any>(null);
   const { pickImage } = PickImage();
   const { takePicture } = TakePicture();
+  const [loading, setLoading] = useState(false);
 
   const handlePickImage = async () => {
     const imageUri = await pickImage();
+
     if (imageUri) {
       sendImageToApi(imageUri);
     }
   }
   const handleTakePicture = async () => {
     const imageUri = await takePicture();
-    
-    sendImageToApi(imageUri);
+    if (imageUri) {
+      sendImageToApi(imageUri);
+    }
   }
 
   const sendImageToApi = async (imageUri: string | undefined) => {
@@ -26,6 +29,8 @@ export const useSkinPageLogic = () => {
       return;
     }
     try {
+      setLoading(true);
+
       const localUri = imageUri;
       const filename = localUri.split('/').pop();
       const match = /\.(\w+)$/.exec(filename ?? '');
@@ -50,8 +55,10 @@ export const useSkinPageLogic = () => {
 
       const data = await response.json();
       setApiResponse(data);
+      setLoading(false);
       console.log('API Response:', data);
     } catch (error) {
+      setLoading(false);
       console.error('Error sending image:', error);
     }
   };
@@ -60,5 +67,6 @@ export const useSkinPageLogic = () => {
     handlePickImage,
     handleTakePicture,
     apiResponse,
+    loading
   };
 };
