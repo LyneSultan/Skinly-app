@@ -6,9 +6,10 @@ type buttonProps = {
   mode?: 'text' | 'outlined' | 'contained';
   text: string;
   onPress?: () => void;
+  disabled?: boolean;
 }
 
-const ButtonComponent = ({ mode = 'contained', text, onPress }: buttonProps) => {
+const ButtonComponent = ({ mode = 'contained', text, onPress, disabled = false }: buttonProps) => {
   return (
     <Button
       mode={mode}
@@ -21,7 +22,10 @@ const ButtonComponent = ({ mode = 'contained', text, onPress }: buttonProps) => 
           borderColor: colors.secondary,
           borderWidth: 3,
         },
+        disabled && { opacity: 0.5 },
+
       ]}
+      disabled={disabled}
     >
       {text}
     </Button>
