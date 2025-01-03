@@ -7,9 +7,9 @@ export const style = StyleSheet.create(
     previewCard: {
       backgroundColor: colors.rose,
       ...base.borderRadius,
-      padding: 15,
       shadowColor: '#000',
       elevation: 5,
+
 
     },
     uploadImage: {
@@ -18,6 +18,8 @@ export const style = StyleSheet.create(
       padding: 15,
       shadowColor: '#000',
       elevation: 5,
+      minHeight: 150,
+      marginVertical:10,
     },
   }
 )

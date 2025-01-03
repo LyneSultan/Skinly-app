@@ -10,6 +10,7 @@ export const style = StyleSheet.create({
     alignItems: 'center',
   },
   requirementCard: {
+    marginVertical:20,
     minHeight:250,
     backgroundColor: colors.primary,
     padding: '8%',
