@@ -24,7 +24,7 @@ export const useLoginLogic = () => {
       const token = response.data.access_token;
 
       await AsyncStorage.setItem('authToken', token);
-
+      setErrorMessages([]);
       if (response.data.user.user_type === 'user') {
         router.push('/(tabs)/HomeScreen')
       } else if (response.data.user.user_type === 'company') {

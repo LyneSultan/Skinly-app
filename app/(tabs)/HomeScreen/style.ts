@@ -30,5 +30,12 @@ export const style = StyleSheet.create({
   carousel: {
     width: '100%',
     height: 200
+  },
+  viewMore: {
+    color: colors.primary,
+    fontSize: 14,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+
   }
 });

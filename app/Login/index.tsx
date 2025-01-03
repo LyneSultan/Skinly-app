@@ -13,10 +13,8 @@ const Login = () => {
   return (
     <View style={[base.flex, base.alignCenter, base.default]}>
       <View style={[style.container]}>
-        <View style={[base.alignCenter,
-
-        ]}>
-          <Image source={require('@/assets/images/Project logo.png')} style={{ width: "90%", height: 120 }} />
+        <View style={[base.alignCenter,]}>
+          <Image source={require('@/assets/images/Project logo.png')} style={[style.loginImage]} />
         </View>
 
         <View>
