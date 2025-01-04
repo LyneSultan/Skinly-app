@@ -14,7 +14,7 @@ const HomeScreen = () => {
       <View style={[base.flex, base.default]}>
         <View style={[base.gap]}>
           <Text style={[typography.h1]}>Hello,</Text>
-          <Text style={[typography.h2]}> Let’s take care of your skin!</Text>
+          <Text style={[typography.h2]}> Smart Care for Every Skin Type</Text>
 
           {ads.length > 0 && (
             <PagerView style={style.carousel} initialPage={0}>
@@ -53,8 +53,10 @@ const HomeScreen = () => {
             ))
           ) : (<Text>Loading products...</Text>)}
 
-          <TouchableOpacity style={base.alignCenter} onPress={viewMore} >
-            <Text>View More</Text>
+          <TouchableOpacity style={[base.alignCenter]} onPress={viewMore}>
+            <Text style={style.viewMore} >
+              View More
+            </Text>
           </TouchableOpacity>
 
         </View>
