@@ -11,54 +11,58 @@ export const useOcrLogic = () => {
 
   const handlePickImage = async () => {
     const imageUri = await pickImage();
-    setLoading(true);
 
     console.log("here",imageUri);
 
-    sendToApi(imageUri);
+    if (imageUri) {
+      sendToApi(imageUri);
+    }
   }
   const handleTakePicture = async () => {
     const imageUri = await takePicture();
-    setLoading(true);
-
     console.log("here",imageUri);
-    sendToApi(imageUri);
+    if (imageUri) {
+      sendToApi(imageUri);
+    }
   }
 
-  const sendToApi = async (imageUri: string|undefined) => {
-    if (!imageUri) {
-      console.error('No image URI to send');
-      return;
-    }
-    try {
-      const localUri = imageUri;
-      const filename = localUri.split('/').pop();
-      const match = /\.(\w+)$/.exec(filename ?? '');
-      const type = match ? `image/${match[1]}` : 'image';
+    const sendToApi = async (imageUri: string|undefined) => {
+      if (!imageUri) {
+        console.error('No image URI to send');
+        return;
+      }
+      try {
+        setLoading(true);
 
-      const formData = new FormData();
-      formData.append('image', {
-        uri: localUri,
-        name: filename,
-        type: type,
-      } as any);
-      const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+        const localUri = imageUri;
+        const filename = localUri.split('/').pop();
+        const match = /\.(\w+)$/.exec(filename ?? '');
+        const type = match ? `image/${match[1]}` : 'image';
 
-      const response = await fetch(apiUrl+routes.ocr, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        body: formData,
-      });
-      const data = await response.json();
-      setLoading(false);
-      console.log('API Response:', data);
-      setApiResponse(data);
-    } catch (error) {
-      console.error('Error sending image:', error);
-    }
-  };
+        const formData = new FormData();
+        formData.append('image', {
+          uri: localUri,
+          name: filename,
+          type: type,
+        } as any);
+        const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
+        const response = await fetch(apiUrl+routes.ocr, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: formData,
+        });
+        const data = await response.json();
+        setLoading(false);
+        console.log('API Response:', data);
+        setApiResponse(data);
+      } catch (error) {
+        setLoading(false);
+        console.error('Error sending image:', error);
+      }
+    };
 
 
   return {
