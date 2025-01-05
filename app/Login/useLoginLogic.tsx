@@ -8,13 +8,19 @@ export const useLoginLogic = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessages, setErrorMessages] = useState([]);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
   const handleLogin = async () => {
     const payload = { email, password };
 
+    if (!email || !password) {
+      setErrorMessages(["All elements are required"]);
+      return;
+    }
+    setLoading(true);
     try {
       const response = await axios.post(apiUrl + routes.login, payload, {
         headers: {
@@ -25,6 +31,7 @@ export const useLoginLogic = () => {
 
       await AsyncStorage.setItem('authToken', token);
       setErrorMessages([]);
+      setLoading(false);
       if (response.data.user.user_type === 'user') {
         router.push('/(tabs)/HomeScreen')
       } else if (response.data.user.user_type === 'company') {
@@ -32,6 +39,7 @@ export const useLoginLogic = () => {
       }
 
     } catch (error: any) {
+      setLoading(false);
       setErrorMessages(error.response.data.message);
     };
   }
@@ -40,6 +48,7 @@ export const useLoginLogic = () => {
     handleLogin,
     setEmail,
     setPassword,
-    errorMessages
+    errorMessages,
+    loading
   };
 }
