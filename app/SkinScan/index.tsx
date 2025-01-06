@@ -10,12 +10,7 @@ import { style } from './style';
 import { useSkinPageLogic } from './useSkinPageLogic';
 
 const SkinScan = () => {
-  const { handlePickImage, handleTakePicture, apiResponse, loading } = useSkinPageLogic();
-  const imageMap = {
-    dry: require('@/assets/images/dry.png'),
-    oily: require('@/assets/images/oily.png'),
-    normal: require('@/assets/images/normal.png'),
-  };
+  const { handlePickImage, handleTakePicture, imageMap, apiResponse, loading } = useSkinPageLogic();
 
   return (
     <View style={[base.flex, base.default]}>
@@ -43,32 +38,17 @@ const SkinScan = () => {
         {apiResponse && (
           <>
             {apiResponse.error && (
-              <Text style={{ color: 'red', fontSize: 16, textAlign: 'center', marginBottom: 10 }}>
-                An error occurred. Please retry again.
-              </Text>
+              <Text style={style.errorText}>An error occurred. Please retry again.</Text>
             )}
             {apiResponse.class && (
-              <View
-                style={[
-                  base.flex,
-                  base.row,
-                  { backgroundColor: '#F0F0F0', padding: 15, borderRadius: 10, alignItems: 'center', marginBottom: 15 },
-                ]}
-              >
-                <Text style={{ fontSize: 18, fontWeight: 'bold', flex: 1 }}>
-                  Your skin type is{' '}
+              <View style={[base.flex, base.row, base.alignCenter, { padding: 15 }]} >
+                <Text style={[typography.h1, typography.bold, { flex: 1 }]}>
+                  Your skin type is
                   <Text style={{ color: colors.primary }}>
                     {apiResponse.class.charAt(0).toUpperCase() + apiResponse.class.slice(1)}
                   </Text>
                 </Text>
-                {imageMap[apiResponse.class] ? (
-                  <Image
-                    source={imageMap[apiResponse.class]}
-                    style={{ width: 60, height: 60, resizeMode: 'contain', marginLeft: 10 }}
-                  />
-                ) : (
-                  <Text>No image available</Text>
-                )}
+                <Image source={imageMap[apiResponse.class]} style={style.skinTypeImage} />
               </View>
             )}
           </>
