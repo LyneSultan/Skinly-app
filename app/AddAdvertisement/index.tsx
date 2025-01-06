@@ -1,4 +1,3 @@
-import { colors } from "@/colors/colors";
 import ButtonComponent from "@/components/base/Button";
 import { PickImage } from "@/hooks/ImagePicker/pickImage";
 import { base } from "@/style/base";
@@ -39,18 +38,12 @@ const AddvertisementPage = () => {
         {imageUri ? (
           <View style={base.gap}>
             <View style={[style.previewCard, base.flex, base.row, base.alignCenter, base.spaceAround]}>
-
-              <Image
-                source={{ uri: imageUri }}
-                style={{ width: "100%", height: 200, borderRadius: 20 }} />
+              <Image source={{ uri: imageUri }} style={style.previewImage} />
             </View>
             <ButtonComponent text="Save" onPress={handleSave} />
           </View>
         ) : (
-          <View style={[style.previewCard, base.flex, base.row, base.alignCenter, base.spaceAround]}>
-            <View style={{ width: 200, height: 200, backgroundColor: colors.rose }} >
-            </View>
-          </View>
+          <View style={[style.previewCard, base.flex, base.row, base.alignCenter, base.spaceAround]}></View>
         )}
       </View>
     </View >
