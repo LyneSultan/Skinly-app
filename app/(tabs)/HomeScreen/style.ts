@@ -29,13 +29,35 @@ export const style = StyleSheet.create({
   },
   carousel: {
     width: '100%',
-    height: 200
+    height: 230
   },
   viewMore: {
     color: colors.primary,
     fontSize: 14,
     fontWeight: 'bold',
     fontStyle: 'italic',
-
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  dotsContainer: {
+    marginTop: 10,
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+  },
+  activeDot: {
+    backgroundColor: '#000',
+  },
+  inactiveDot: {
+    backgroundColor: '#ccc',
   }
 });
