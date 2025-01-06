@@ -18,5 +18,12 @@ export const style = StyleSheet.create({
     elevation: 5,
     ...base.borderRadius,
     gap: '15%'
+  },
+  errorText: {
+    color: colors.error,
+    fontSize: 16,
+  },
+  skinTypeImage: {
+     width: 60, height: 60, resizeMode: 'contain'
   }
 });
