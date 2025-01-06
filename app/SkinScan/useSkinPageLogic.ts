@@ -62,8 +62,13 @@ export const useSkinPageLogic = () => {
       console.error('Error sending image:', error);
     }
   };
-
+  const imageMap = {
+    dry: require('@/assets/images/dry.png'),
+    oily: require('@/assets/images/oily.png'),
+    normal: require('@/assets/images/normal.png'),
+  };
   return {
+    imageMap,
     handlePickImage,
     handleTakePicture,
     apiResponse,
