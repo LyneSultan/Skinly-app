@@ -1,6 +1,6 @@
 import { base } from "@/style/base";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { style } from "./style";
 
 const Profile = () => {
@@ -8,6 +8,12 @@ const Profile = () => {
     <View style={[base.default, base.flex]}>
       <View style={[style.container, base.alignCenter, base.justifyCenter]}>
         <View style={style.card}>
+          <View style={[base.flex, base.row, base.spaceBetween]}>
+            <Text style={style.title}>Personal Details</Text>
+            <TouchableOpacity>
+              <Text style={style.editButton}>edit</Text>
+            </TouchableOpacity>
+          </View>
           <View style={[style.details, base.gap]}>
             <View>
               <Text style={style.label}>first name</Text>
@@ -32,9 +38,6 @@ const Profile = () => {
       </View>
     </View>
   );
-
 };
-
-
 
 export default Profile;
