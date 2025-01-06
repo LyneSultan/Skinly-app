@@ -1,63 +1,53 @@
+import ProductCard from '@/components/ProductCard';
 import { base } from '@/style/base';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { style } from './style';
 import { useProductLogic } from './useProductLogic';
 
 const ProductSearch = () => {
-  const { productDetails, searchQuery, setSearchQuery, productLink } = useProductLogic();
+  const { productDetails, searchQuery, setSearchQuery, productLink, similarProducts } = useProductLogic();
 
   return (
     <ScrollView style={[base.default]}>
       <View style={[base.gap]}>
-        <Searchbar
-          placeholder="Search"
-          value={searchQuery}
-          onChangeText={(text) => { setSearchQuery(text) }}
-          style={style.searchBar} />
+        <Searchbar placeholder="Search" value={searchQuery}
+          onChangeText={(text) => setSearchQuery(text)} style={style.searchBar} />
 
-        {productDetails.length === 0 ? (
+        {!productDetails ? (
           <View style={[base.flex, base.alignCenter, base.justifyCenter]}>
             <Text style={style.notFoundText}>No products found</Text>
-          </View>)
-          : (
+          </View>
+        ) : (
+          <View>
+            <Text>Product across multiple platforms</Text>
             <View style={[base.flex, base.row, base.spaceAround, base.wrap]}>
               {productDetails.map((item, index) => (
-                <View style={[style.productContainer, base.flex, base.column, base.gap]} key={index}>
-                  <View>
-                    <Image
-                      source={{ uri: item.product.image }}
-                      style={[style.productImage, base.borderRadius]}
-                    />
-                  </View>
-                  <View style={[base.flex, base.row, base.gap, { maxWidth: '50%', }]}>
-                    <View>
-                      <Image
-                        source={{ uri: item.company_logo }}
-                        style={[style.logo, base.borderRadius]}
-                      />
-                    </View>
-                    <View>
-                      <Text>{item.companyName}</Text>
-                    </View>
-                    <View>
-                      <Text>{item.product.price.split(' ')[0]}</Text>
-                    </View>
-                  </View>
-
-                  <Text>{item.product.name}</Text>
-
-                  <TouchableOpacity onPress={() => productLink(item.product.link)} style={base.alignCenter}>
-                    <Text>Learn more</Text>
-                  </TouchableOpacity>
-                </View>
+                <ProductCard
+                  key={index} product={item.product}
+                  company={{ name: item.companyName, logo: item.company_logo }}
+                  onLinkPress={productLink} />
               ))}
             </View>
-          )}
+          </View>
+        )}
+
+        {similarProducts && similarProducts.length > 0 && (
+          <View>
+            <Text>Similar Products</Text>
+            <View style={[base.flex, base.row, base.spaceAround, base.wrap]}>
+              {similarProducts.map((item, index) => (
+                <ProductCard
+                  key={index} product={item.product}
+                  company={{ name: item.companyName, logo: item.company_logo }}
+                  onLinkPress={productLink} />
+              ))}
+            </View>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
-
 };
 
 export default ProductSearch;
