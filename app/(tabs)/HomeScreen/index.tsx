@@ -64,9 +64,7 @@ const HomeScreen = () => {
           ) : (<Text>Loading products...</Text>)}
 
           <TouchableOpacity style={[base.alignCenter]} onPress={viewMore}>
-            <Text style={style.viewMore} >
-              View More
-            </Text>
+            <Text style={style.viewMore} > View More </Text>
           </TouchableOpacity>
 
         </View>
