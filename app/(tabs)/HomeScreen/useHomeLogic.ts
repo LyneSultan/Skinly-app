@@ -8,6 +8,8 @@ export const useHomeLogic = () => {
   const [data, setData] = useState<DataItem[]>([]);
   const [page, setPage] = useState(1);
   const [ads, setAds] = useState<string[]>([]);
+  const [adsIndex, setAdsIndex] = useState(0);
+
   const newAds :string[] = [];
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export const useHomeLogic = () => {
             }
           })
         );
-        setAds(() => [ ...newAds]);
+        setAds((prevAds) => [...prevAds, ...newAds]);
         console.log(ads);
 
       } catch (error:any) {
@@ -33,10 +35,11 @@ export const useHomeLogic = () => {
     getData();
   }, [page]);
 
- const fetchData = async (page?:number) => {
+ const fetchData = async () => {
    try {
     const response = await fetch(`${apiUrl}/product?page=${page}&pageSize=${pageSize}`);
-    const data = await response.json();
+     const data = await response.json();
+     console.log(page);
     return data;
   } catch (error) {
     console.error(error);
@@ -48,10 +51,16 @@ export const useHomeLogic = () => {
     setPage(current);
   }
 
+    const handleAdsChange = (event: any) => {
+      setAdsIndex(event.nativeEvent.position);
+    };
+
   return {
     data,
     page,
     ads,
+    handleAdsChange,
+    adsIndex,
     viewMore
   }
 }
