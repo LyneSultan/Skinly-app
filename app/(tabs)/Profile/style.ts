@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
   container: {
+    flex:0.8,
     backgroundColor: colors.background,
   },
   card: {
-    width: "90%",
+    width: "100%",
     backgroundColor: "#fff",
     borderRadius: 20,
     borderWidth: 1,

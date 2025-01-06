@@ -9,8 +9,7 @@ export const style = StyleSheet.create(
       ...base.borderRadius,
       shadowColor: '#000',
       elevation: 5,
-
-
+      width: "100%", height: 200
     },
     uploadCard: {
       ...base.borderRadius,
@@ -32,6 +31,11 @@ export const style = StyleSheet.create(
       fontWeight: 'bold',
       color: '#fff'
     },
-    uploadImage:{ width: 50, height: 50, resizeMode: 'contain' }
+    uploadImage: { width: 50, height: 50, resizeMode: 'contain' },
+    previewImage: {
+      width: "100%",
+      height: 200,
+      borderRadius: 20
+    }
   }
 )
