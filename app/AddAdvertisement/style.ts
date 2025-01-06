@@ -12,7 +12,7 @@ export const style = StyleSheet.create(
 
 
     },
-    uploadImage: {
+    uploadCard: {
       ...base.borderRadius,
       backgroundColor: colors.secondary ,
       padding: 15,
@@ -21,5 +21,17 @@ export const style = StyleSheet.create(
       minHeight: 150,
       marginVertical:10,
     },
+    productName: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      color: colors.primary
+    },
+    uploadText: {
+      flexShrink: 1,
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: '#fff'
+    },
+    uploadImage:{ width: 50, height: 50, resizeMode: 'contain' }
   }
 )
