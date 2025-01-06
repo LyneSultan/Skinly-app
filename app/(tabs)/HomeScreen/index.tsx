@@ -1,6 +1,7 @@
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { Link } from "expo-router";
+import { useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import PagerView from 'react-native-pager-view';
 import { style } from "./style";
@@ -8,7 +9,11 @@ import { useHomeLogic } from "./useHomeLogic";
 
 const HomeScreen = () => {
   const { data, ads, viewMore } = useHomeLogic();
+  const [currentPage, setCurrentPage] = useState(0);
 
+  const handlePageChange = (event: any) => {
+    setCurrentPage(event.nativeEvent.position);
+  };
   return (
     <ScrollView>
       <View style={[base.flex, base.default]}>
@@ -16,15 +21,25 @@ const HomeScreen = () => {
           <Text style={[typography.h1]}>Hello,</Text>
           <Text style={[typography.h2]}> Smart Care for Every Skin Type</Text>
 
-          {ads.length > 0 && (
-            <PagerView style={style.carousel} initialPage={0}>
-              {ads.map((ad, index) => (
-                <Image key={index}
-                  source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${ad}` }}
-                  style={[style.carousel, base.borderRadius]} />
-              ))}
-            </PagerView>
-          )}
+          <View style={style.container}>
+            {ads.length > 0 && (
+              <>
+                <PagerView style={style.carousel} initialPage={0} onPageSelected={handlePageChange} >
+                  {ads.map((ad, index) => (
+                    <Image key={index} source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${ad}` }}
+                      style={[style.image, style.borderRadius]} />
+                  ))}
+                </PagerView>
+
+                <View style={style.dotsContainer}>
+                  {ads.map((_, index) => (
+                    <View key={index}
+                      style={[style.dot, index === currentPage ? style.activeDot : style.inactiveDot,]} />
+                  ))}
+                </View>
+              </>
+            )}
+          </View>
 
           <View style={[style.scanContainer, base.flex, base.row, base.spaceBetween, base.alignCenter]}>
             <Image source={require('@/assets/images/scan-logo.png')} />
@@ -66,3 +81,4 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
