@@ -1,19 +1,14 @@
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { Link } from "expo-router";
-import { useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import PagerView from 'react-native-pager-view';
 import { style } from "./style";
 import { useHomeLogic } from "./useHomeLogic";
 
 const HomeScreen = () => {
-  const { data, ads, viewMore } = useHomeLogic();
-  const [currentPage, setCurrentPage] = useState(0);
+  const { data, ads, viewMore, adsIndex, handleAdsChange } = useHomeLogic();
 
-  const handlePageChange = (event: any) => {
-    setCurrentPage(event.nativeEvent.position);
-  };
   return (
     <ScrollView>
       <View style={[base.flex, base.default]}>
@@ -24,17 +19,17 @@ const HomeScreen = () => {
           <View style={style.container}>
             {ads.length > 0 && (
               <>
-                <PagerView style={style.carousel} initialPage={0} onPageSelected={handlePageChange} >
+                <PagerView style={style.carousel} initialPage={0} onPageSelected={handleAdsChange} >
                   {ads.map((ad, index) => (
                     <Image key={index} source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${ad}` }}
-                      style={[style.image, style.borderRadius]} />
+                      style={[style.image, base.borderRadius]} />
                   ))}
                 </PagerView>
 
-                <View style={style.dotsContainer}>
+                <View style={[style.dotsContainer, base.flex, base.row, base.justifyCenter, base.alignCenter, base.gap]}>
                   {ads.map((_, index) => (
                     <View key={index}
-                      style={[style.dot, index === currentPage ? style.activeDot : style.inactiveDot,]} />
+                      style={[style.dot, index === adsIndex ? style.activeDot : style.inactiveDot,]} />
                   ))}
                 </View>
               </>
