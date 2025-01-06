@@ -6,18 +6,21 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 export const useProductLogic = () => {
   const { name } = useLocalSearchParams();
 
- const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
+  const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
+  const [similarProducts, setSimilarProducts] = useState<ProductDetails[]>([]);
+
   const [searchQuery, setSearchQuery] = useState('');
   useEffect(() => {
     setSearchQuery('');
-    console.log("enter or out")
-
   }, [name]);
+
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
         const details = await getProduct(searchQuery || name);
-        setProductDetails(details);
+        
+        setProductDetails(details.bestMatches);
+        setSimilarProducts(details.similarProducts);
       } catch (error) {
         console.error('Error fetching product details:', error);
       }
@@ -49,7 +52,8 @@ export const useProductLogic = () => {
     productLink,
     searchQuery,
     setSearchQuery,
-    productDetails
+    productDetails,
+    similarProducts
   };
 };
 
@@ -64,4 +68,5 @@ export type ProductDetails = {
   companyName: string;
   company_logo: string;
   product: Product;
+  similarity: number;
 }
