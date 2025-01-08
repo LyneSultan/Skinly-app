@@ -43,7 +43,7 @@ export const base = StyleSheet.create({
     padding:10,
   },
   gap: {
-    gap:10,
+    gap:15,
   },
   whiteText: {
     color:"#fff"

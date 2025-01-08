@@ -6,7 +6,7 @@ export const style = StyleSheet.create({
   productContainer: {
     backgroundColor: colors.rose,
     marginBottom: 10,
-    width: "47%",
+    width: "45%",
     padding: 7,
     ...base.borderRadius
   },

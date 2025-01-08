@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 
   stepContainer: {
-    backgroundColor: "#E3B6C5",
+    backgroundColor: colors.primary,
     borderRadius: 30,
     padding: 2,
     elevation: 5,
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.rose,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   stepText: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: colors.rose
+    color: colors.primary
 
   },
   textContainer: {
