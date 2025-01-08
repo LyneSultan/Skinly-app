@@ -7,6 +7,16 @@ export const style = StyleSheet.create({
     backgroundColor: colors.primary
   },
   notFoundText: {
-     color: colors.primary, fontSize: 16
-  }
+    color: colors.primary,
+    fontSize: 18,
+    fontWeight:'bold'
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 10,
+    letterSpacing: 0.5,
+  },
 })
