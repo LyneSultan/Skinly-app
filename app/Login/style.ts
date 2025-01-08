@@ -1,5 +1,6 @@
 
 import { colors } from '@/colors/colors';
+import { typography } from '@/style/typography';
 import { StyleSheet } from 'react-native';
 
 export const style = StyleSheet.create({
@@ -8,8 +9,14 @@ export const style = StyleSheet.create({
     gap: 20,
     width:"100%"
   },
+   title: {
+      marginVertical: 20,
+      fontSize:42,
+      ...typography.bold,
+      color:colors.primary
+    },
   loginImage: {
-    width: "90%", height: 120
+    width: 60, height: 60
   },
   loginForm: {
     gap:10
