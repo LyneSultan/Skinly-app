@@ -1,6 +1,7 @@
 import { PickImage } from '@/hooks/ImagePicker/pickImage';
 import { TakePicture } from '@/hooks/ImagePicker/takePicture';
 import { routes } from '@/routes/server.routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
 export const useOcrLogic = () => {
@@ -26,7 +27,12 @@ export const useOcrLogic = () => {
     }
   }
 
-    const sendToApi = async (imageUri: string|undefined) => {
+  const sendToApi = async (imageUri: string | undefined) => {
+    const token = await AsyncStorage.getItem("authToken");
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
       if (!imageUri) {
         console.error('No image URI to send');
         return;
@@ -46,10 +52,13 @@ export const useOcrLogic = () => {
           type: type,
         } as any);
         const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+        console.log(apiUrl);
+        console.log(imageUri);
 
         const response = await fetch(apiUrl+routes.ocr, {
           method: 'POST',
           headers: {
+            'Authorization':token,
             'Content-Type': 'multipart/form-data',
           },
           body: formData,
