@@ -1,6 +1,6 @@
 import ProductCard from '@/components/ProductCard';
 import { base } from '@/style/base';
-import { ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { style } from './style';
 import { useProductLogic } from './useProductLogic';
@@ -15,13 +15,17 @@ const ProductSearch = () => {
           onChangeText={(text) => setSearchQuery(text)} style={style.searchBar} />
 
         {!productDetails ? (
-          <View style={[base.flex, base.alignCenter, base.justifyCenter]}>
-            <Text style={style.notFoundText}>No products found</Text>
+          <View style={[base.flex, base.row, { height: '100%', width: '100%' }]}>
+            <View style={[base.alignCenter, base.justifyCenter, { height: '100%', width: '100%' }]}>
+              <Image source={require('@/assets/images/notFound.png')} style={{ width: 250, height: 250 }} />
+              <Text style={style.notFoundText}>No products found</Text>
+            </View>
           </View>
         ) : (
           <View>
-            <Text>Product across multiple platforms</Text>
-            <View style={[base.flex, base.row, base.spaceAround, base.wrap]}>
+            <Text style={style.title}>Product Across Multiple Platforms</Text>
+
+            <View style={[base.flex, base.row, base.gap, base.wrap]}>
               {productDetails.map((item, index) => (
                 <ProductCard
                   key={index} product={item.product}
@@ -34,8 +38,8 @@ const ProductSearch = () => {
 
         {similarProducts && similarProducts.length > 0 && (
           <View>
-            <Text>Similar Products</Text>
-            <View style={[base.flex, base.row, base.spaceAround, base.wrap]}>
+            <Text style={style.title}>Similar Products</Text>
+            <View style={[base.flex, base.row, base.gap, base.wrap]}>
               {similarProducts.map((item, index) => (
                 <ProductCard
                   key={index} product={item.product}
