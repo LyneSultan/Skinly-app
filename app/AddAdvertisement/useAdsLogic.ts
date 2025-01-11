@@ -1,14 +1,22 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { routes } from "@/routes/server.routes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 
 export const useAdsLogic = () => {
   const [imageUri, setImageUri] = useState<string | null>(null);
-  const { productName } = useLocalSearchParams();
+  const { productName } = useLocalSearchParams<{ productName: string }>();
 
   const handleSave = async () => {
     const token = await AsyncStorage.getItem("authToken");
-    if (imageUri && token) {
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
+    console.log(productName)
+    console.log(imageUri)
+
+    if (imageUri) {
       const localUri = imageUri;
       const filename = localUri.split('/').pop();
       const match = /\.(\w+)$/.exec(filename ?? '');
@@ -19,11 +27,14 @@ export const useAdsLogic = () => {
         uri: localUri,
         name: filename,
         type: type,
-      } as any);
+      } as unknown as File);
+      console.log(productName)
+
       try {
-        console.log(productName);
-        console.log(`${process.env.EXPO_PUBLIC_API_URL}/advertisement/${productName}`);
-        const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/advertisement/${productName}`, {
+        // const apiUrl = `${process.env.EXPO_PUBLIC_API_URL}/advertisement/${productName}`;
+        const apiUrl = process.env.EXPO_PUBLIC_API_URL+routes.advertisement(productName);
+        console.log("Saving to URL:", apiUrl);
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Authorization': token,
@@ -31,16 +42,17 @@ export const useAdsLogic = () => {
           },
           body: formData,
         });
-        console.log(response);
+        console.log("Response:", response);
       } catch (error: any) {
-        console.log('Error uploading image:', error.message);
+        console.error('Error uploading image:', error.message);
       }
     }
+  };
 
-  }
+
   return {
     imageUri,
     handleSave,
-    setImageUri
-  }
-}
+    setImageUri,
+  };
+};

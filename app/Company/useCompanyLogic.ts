@@ -1,3 +1,4 @@
+import { routes } from '@/routes/server.routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -35,7 +36,7 @@ export const useCompanyLogic = () => {
    try {
      const TOKEN=await AsyncStorage.getItem('authToken');
 
-     const response = await axios.get(`${apiUrl}/product/company`, {
+     const response = await axios.get(apiUrl+routes.getCompanyProducts, {
       headers: {
         Authorization: TOKEN,
       },
