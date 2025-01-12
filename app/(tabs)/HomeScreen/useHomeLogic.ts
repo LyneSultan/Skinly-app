@@ -1,3 +1,4 @@
+import { routes } from '@/routes/server.routes';
 import { fetch } from 'expo/fetch';
 import { useEffect, useState } from 'react';
 
@@ -21,12 +22,15 @@ export const useHomeLogic = () => {
         fetchedData.forEach((d:DataItem) =>
           d.products?.forEach((product) => {
             if (product.additional_info) {
+              console.log(product.name);
+
               newAds.push(product.additional_info.advertisement);
             }
           })
         );
         setAds((prevAds) => [...prevAds, ...newAds]);
         console.log(ads);
+
 
       } catch (error:any) {
         console.log(error.message);
@@ -37,7 +41,7 @@ export const useHomeLogic = () => {
 
  const fetchData = async () => {
    try {
-    const response = await fetch(`${apiUrl}/product?page=${page}&pageSize=${pageSize}`);
+    const response = await fetch(apiUrl+routes.getProducts(page,pageSize));
      const data = await response.json();
      console.log(page);
     return data;
