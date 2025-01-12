@@ -17,5 +17,20 @@ export const style = StyleSheet.create({
   productImage: {
     width: "100%",
     height: 150,
-  }
+  },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+  },
+  buttonText: {
+    marginHorizontal: 5,
+    fontSize: 16,
+    color: 'black',
+  },
 });
