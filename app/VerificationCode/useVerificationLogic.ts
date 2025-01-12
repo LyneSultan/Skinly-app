@@ -1,38 +1,39 @@
-import { routes } from "@/routes/server.routes";
-import axios from "axios";
-import { router } from "expo-router";
-import { useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 
-const useVerifcationLogic = () => {
-  const [error, setError] = useState("");
+const useVerificationLogic = () => {
+  const router = useRouter();
+  const { email } = useLocalSearchParams<{ email: string }>();
+  const { code } = useLocalSearchParams<{ code: string }>();
+  const [inputs, setInputs] = useState(['', '', '', '']);
 
-  const senCode = async (email: string) => {
-    setError("");
-    if (!email) {
-      setError("Email is required.");
-      return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    try {
-      const response = await axios.post(process.env.EXPO_PUBLIC_API_URL + routes.veificationCode, {
-        email,
-      })
-      const code = response.data;
-      router.push(`/VerificationCode?code=${code}`)
+  useEffect(() => {
+    console.log(`Email: ${email}`);
+  }, [code]);
 
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
+  const handleInputChange = (value: string, index: number) => {
+    const updatedInputs = [...inputs];
+    updatedInputs[index] = value;
+    setInputs(updatedInputs);
+    console.log(updatedInputs.join(''));
+    console.log("here");
+  };
+
+  const handleSubmit = () => {
+    const verificationCode = inputs.join('');
+    console.log(`Verification Code: ${verificationCode}`);
+    if (code === verificationCode) {
+      router.push(`/PasswordReset?email=${email}`);
+
     }
-  }
+    else {
+      console.log(`verifivation${verificationCode} while code is${code}`)
+    }
+  };
   return {
-    senCode,
-    error
+    inputs,
+    handleInputChange,
+    handleSubmit
   }
 }
-export default  useVerifcationLogic;
+export default useVerificationLogic;
