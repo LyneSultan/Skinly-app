@@ -1,6 +1,7 @@
 import { PickImage } from '@/hooks/ImagePicker/pickImage';
 import { TakePicture } from '@/hooks/ImagePicker/takePicture';
 import { routes } from '@/routes/server.routes';
+import axios from 'axios';
 import { useState } from 'react';
 
 export const useSkinPageLogic = () => {
@@ -8,6 +9,9 @@ export const useSkinPageLogic = () => {
   const { pickImage } = PickImage();
   const { takePicture } = TakePicture();
   const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
   const handlePickImage = async () => {
     const imageUri = await pickImage();
@@ -43,7 +47,6 @@ export const useSkinPageLogic = () => {
         type: type,
       } as any);
 
-      const apiUrl = process.env.EXPO_PUBLIC_API_URL;
       console.log(apiUrl);
       const response = await fetch(apiUrl+routes.skinDetection, {
         method: 'POST',
@@ -55,6 +58,7 @@ export const useSkinPageLogic = () => {
 
       const data = await response.json();
       setApiResponse(data);
+      getRecommendation();
       setLoading(false);
       console.log('API Response:', data);
     } catch (error) {
@@ -62,16 +66,34 @@ export const useSkinPageLogic = () => {
       console.error('Error sending image:', error);
     }
   };
+  const getRecommendation = async() => {
+    try {
+      const recommendation = await axios.get( `${apiUrl}/product/skin/dry`);
+      console.log("data:",recommendation.data);
+      const suggestionsString = recommendation.data.suggestions;
+
+      setSuggestions(suggestionsString);
+    } catch (error) {
+      console.log(error);
+     }
+  }
+
   const imageMap = {
     dry: require('@/assets/images/dry.png'),
     oily: require('@/assets/images/oily.png'),
     normal: require('@/assets/images/normal.png'),
   };
+
   return {
     imageMap,
     handlePickImage,
     handleTakePicture,
     apiResponse,
+    suggestions,
     loading
   };
 };
+type Suggestion= {
+  name: string;
+  reason: string;
+}
