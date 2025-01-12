@@ -22,7 +22,7 @@ export const Input = ({ label, text, password, onChangeText, errorText, hasError
         mode="outlined"
         outlineStyle={styles.outline}
         theme={{ colors: theme }}
-        style={{ height: 45 }}
+        style={{ height: 50 }}
         error={hasErrors}
       />
       {hasErrors && (

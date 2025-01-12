@@ -20,7 +20,7 @@ const ProductCard = ({ product, company, onLinkPress }: ProductCardProps) => (
     <View>
       <Image source={{ uri: product.image }} style={[style.productImage, base.borderRadius]} />
     </View>
-    <View style={[base.flex, base.row, base.gap, { maxWidth: '50%' }]}>
+    <View style={[base.flex, base.row, base.spaceAround, base.wrap]}>
       <View>
         <Image source={{ uri: company.logo }} style={[style.logo, base.borderRadius]} />
       </View>
