@@ -4,6 +4,7 @@ export const routes = {
   veificationCode: "/auth/sendCode",
   skinDetection: "/skinDetection",
   ocr: "/ocr",
+  reset: "/auth/reset",
   advertisement: (productName: string) => "/advertisement/" + productName,
   getCompanyProducts: "/product/company",
   getProducts: (page: number, pageSize: number) => `/product?page=${page}&pageSize=${pageSize}`,
