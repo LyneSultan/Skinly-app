@@ -3,7 +3,7 @@ import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { style } from "./style";
@@ -14,7 +14,8 @@ const Company = () => {
   const { page, nextHandle, previousHandle, data } = useCompanyLogic();
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: colors.background }}>
+
       <View style={[base.default]}>
         <View style={[base.gap]}>
           <Text style={[typography.h1]}>Promote your products to users effectively</Text>
@@ -51,14 +52,14 @@ const Company = () => {
               )}
             </View>
 
-            <View style={styles.paginationContainer}>
-              <TouchableOpacity onPress={previousHandle} style={styles.button}>
+            <View style={style.paginationContainer}>
+              <TouchableOpacity onPress={previousHandle} style={style.button}>
                 <Icon name="arrow-back-ios" size={24} color="black" />
-                <Text style={styles.text}>Previous</Text>
+                <Text style={style.buttonText}>Previous</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={nextHandle} style={styles.button}>
-                <Text style={styles.text}>Next</Text>
+              <TouchableOpacity onPress={nextHandle} style={style.button}>
+                <Text style={style.buttonText}>Next</Text>
                 <Icon name="arrow-forward-ios" size={24} color="black" />
               </TouchableOpacity>
             </View>
@@ -68,21 +69,5 @@ const Company = () => {
     </ScrollView>
   );
 };
-const styles = StyleSheet.create({
-  paginationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-  },
-  text: {
-    marginHorizontal: 5,
-    fontSize: 16,
-    color: 'black',
-  },
-});
+
 export default Company;
