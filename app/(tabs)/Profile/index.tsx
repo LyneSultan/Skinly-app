@@ -1,37 +1,63 @@
+import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { style } from "./style";
 
 const Profile = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "Lyne",
+    lastName: "Al-Sultan",
+    email: "Lynesultane@gmail.com",
+    skinType: "normal",
+  });
+
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleChange = (key, value) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
+  };
   return (
-    <View style={[base.default, base.flex]}>
-      <View style={[style.container, base.alignCenter, base.justifyCenter]}>
-        <View style={style.card}>
-          <View style={[base.flex, base.row, base.spaceBetween]}>
-            <Text style={style.title}>Personal Details</Text>
-            <TouchableOpacity>
-              <Text style={style.editButton}>edit</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={[style.details, base.gap]}>
-            <View>
-              <Text style={style.label}>first name</Text>
-              <Text style={style.value}>Lyne</Text>
+    <View style={{ backgroundColor: colors.background }}>
+      <View style={[base.default, base.flex]}>
+        <View style={[style.container, base.alignCenter, base.justifyCenter]}>
+          <View style={style.card}>
+            <View style={[base.flex, base.row, base.spaceBetween]}>
+              <Text style={style.title}>Personal Details</Text>
+              <TouchableOpacity onPress={handleEditToggle}>
+                <Text style={style.editButton}>{isEditing ? "save" : "edit"}</Text>
+              </TouchableOpacity>
             </View>
+            <View style={[style.details, base.gap]}>
+              <View>
+                <Text style={style.label}>first name</Text>
+                {isEditing ? (
+                  <TextInput
+                    style={style.input}
+                    value={formData.firstName}
+                    onChangeText={(text) => handleChange("firstName", text)}
+                  />
+                ) : (
+                  <Text style={style.value}>{formData.firstName}</Text>
+                )}
+              </View>
 
-            <View>
-              <Text style={style.label}>Last name</Text>
-              <Text style={style.value}>Al-Sultan</Text>
-            </View>
+              <View>
+                <Text style={style.label}>Last name</Text>
+                <Text style={style.value}>Al-Sultan</Text>
+              </View>
 
-            <View>
-              <Text style={style.label}>Email</Text>
-              <Text style={style.value}>Lynesultane@gmail.com</Text>
-            </View>
-            <View>
-              <Text style={style.label}>Skin type</Text>
-              <Text style={style.value}>normal</Text>
+              <View>
+                <Text style={style.label}>Email</Text>
+                <Text style={style.value}>Lynesultane@gmail.com</Text>
+              </View>
+              <View>
+                <Text style={style.label}>Skin type</Text>
+                <Text style={style.value}>normal</Text>
+              </View>
             </View>
           </View>
         </View>
