@@ -3,18 +3,17 @@ import ButtonComponent from "@/components/base/Button";
 import { Input } from "@/components/base/Input";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
-import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Image, Keyboard, KeyboardAvoidingView, Text, TouchableWithoutFeedback, View } from "react-native";
-import useVerifcationLogic from "../VerificationCode/useVerificationLogic";
+import { Image, Keyboard, Text, TouchableWithoutFeedback, View } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import useForgetLogic from "./useForgetLogic";
 
 const ForgetPassword = () => {
-  const router = useRouter();
   const [email, setEmail] = useState('');
-  const { senCode, error } = useVerifcationLogic();
+  const { senCode, error } = useForgetLogic();
 
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAwareScrollView style={{ backgroundColor: colors.background }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
         <View style={{ backgroundColor: colors.background }}>
 
@@ -39,7 +38,7 @@ const ForgetPassword = () => {
           </View >
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   )
 }
 export default ForgetPassword;
