@@ -47,7 +47,15 @@ const Profile = () => {
 
               <View>
                 <Text style={style.label}>Last name</Text>
-                <Text style={style.value}>Al-Sultan</Text>
+                {isEditing ? (
+                  <TextInput
+                    style={style.input}
+                    value={formData.lastName}
+                    onChangeText={(text) => handleChange("lastName", text)}
+                  />
+                ) : (
+                  <Text style={style.value}>{formData.lastName}</Text>
+                )}
               </View>
 
               <View>
