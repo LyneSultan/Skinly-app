@@ -72,7 +72,15 @@ const Profile = () => {
               </View>
               <View>
                 <Text style={style.label}>Skin type</Text>
-                <Text style={style.value}>normal</Text>
+                {isEditing ? (
+                  <TextInput
+                    style={style.input}
+                    value={formData.skinType}
+                    onChangeText={(text) => handleChange("skinType", text)}
+                  />
+                ) : (
+                  <Text style={style.value}>{formData.skinType}</Text>
+                )}
               </View>
             </View>
           </View>
