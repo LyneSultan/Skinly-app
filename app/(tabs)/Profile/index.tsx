@@ -60,7 +60,15 @@ const Profile = () => {
 
               <View>
                 <Text style={style.label}>Email</Text>
-                <Text style={style.value}>Lynesultane@gmail.com</Text>
+                {isEditing ? (
+                  <TextInput
+                    style={style.input}
+                    value={formData.email}
+                    onChangeText={(text) => handleChange("email", text)}
+                  />
+                ) : (
+                  <Text style={style.value}>{formData.email}</Text>
+                )}
               </View>
               <View>
                 <Text style={style.label}>Skin type</Text>
