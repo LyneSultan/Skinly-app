@@ -5,15 +5,20 @@ import { base } from "@/style/base"
 import { typography } from "@/style/typography"
 import { Link } from "expo-router"
 import { Image, Text, View } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { style } from "./style"
 import { useRegisterLogic } from "./useRegisterLogic"
 
 const Register = () => {
 
-  const { setEmail, setName, setPassword, setPasswordConfirmation, handleRegister, errorMessages } = useRegisterLogic();
+  const { setEmail, setName, setPassword, setPasswordConfirmation, handleRegister, errorMessages, nameError,
+    emailError,passwordError,passwordConfirmationError
+  } = useRegisterLogic();
 
   return (
-    <View style={{ backgroundColor: colors.background }}>
+        <KeyboardAwareScrollView style={{ backgroundColor: colors.background }}>
+
+    <View >
 
       <View style={[, base.flex, base.alignCenter, base.default,]}>
 
@@ -28,9 +33,17 @@ const Register = () => {
 
           <View style={style.registerForm}>
             <Input label="Name" text="Enter Your Name" onChangeText={(value) => setName(value)} />
+            {nameError && <Text style={style.error}>{nameError}</Text>}
+
             <Input label="Email" text="Enter Your Email" onChangeText={(value) => setEmail(value)} />
+            {emailError && <Text style={style.error}>{emailError}</Text>}
+
             <Input label="Password" text="Enter Your Password" password={true} onChangeText={(value) => setPassword(value)} />
+            {passwordError && <Text style={style.error}>{passwordError}</Text>}
+
             <Input label="Confirm password" text="Enter Your Password Again" onChangeText={(value) => setPasswordConfirmation(value)} />
+            {passwordConfirmationError && <Text style={style.error}>{passwordConfirmationError}</Text>}
+
           </View>
 
           {errorMessages.length > 0 && (
@@ -52,7 +65,8 @@ const Register = () => {
 
         </View>
       </View>
-    </View>
+      </View>
+      </KeyboardAwareScrollView>
 
   )
 }
