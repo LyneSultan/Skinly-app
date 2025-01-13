@@ -3,14 +3,16 @@ import ButtonComponent from "@/components/base/Button"
 import { Input } from "@/components/base/Input"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
+import { Checkbox } from 'expo-checkbox'; // Import expo-checkbox
 import { Link } from "expo-router"
+import { useState } from "react"
 import { Image, Text, View } from "react-native"
 import { style } from "./style"
 import { useLoginLogic } from "./useLoginLogic"
 
 const Login = () => {
   const { setEmail, setPassword, handleLogin, errorMessages, loading } = useLoginLogic();
-
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <View style={{ backgroundColor: colors.background }}>
       <View style={[base.flex, base.alignCenter, base.default]}>
@@ -26,7 +28,14 @@ const Login = () => {
 
           <View style={style.loginForm}>
             <Input label="Email" text="Enter your email" onChangeText={(value) => setEmail(value)} />
-            <Input label="Password" text="Enter your password" password={true} onChangeText={(password) => setPassword(password)} />
+            <Input label="Password" text="Enter your password" password={!showPassword} onChangeText={(password) => setPassword(password)} />
+            <View style={style.checkboxContainer}>
+               <Checkbox
+                value={showPassword}
+                onValueChange={() => setShowPassword(!showPassword)}
+              />
+              <Text style={style.showPasswordText}>Show Password</Text>
+            </View>
           </View>
 
           <View style={base.flex}>
