@@ -1,21 +1,23 @@
-import { routes } from "@/routes/server.routes";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { routes } from '@/routes/server.routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useContext, useState } from 'react';
+import AppContext from '../context/userContext';
 
 const useResetLogic = () => {
   const { email } = useLocalSearchParams<{ email: string }>();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
+  const { setUser } = useContext(AppContext);
 
   const handleReset = async () => {
     if (!password || !confirmPassword) {
-      return console.log("Error", "Both fields are required.");
+      return console.log('Error', 'Both fields are required.');
     }
     if (password !== confirmPassword) {
-      return  console.log("Error", "Passwords do not match.");
+      return console.log('Error', 'Passwords do not match.');
     }
 
     try {
@@ -24,13 +26,14 @@ const useResetLogic = () => {
         email,
         password,
       });
-      console.log(response.data);
+      console.log('data', response.data);
+      await AsyncStorage.setItem('authToken', response.data.access_token);
+      setUser(response.data.user);
 
-      if (response.status === 201) {
+      if (response.data.user.user_type === 'user') {
         router.push('/(tabs)/HomeScreen');
-        await AsyncStorage.setItem("authToken", response.data.access_token);
-        console.log(AsyncStorage.getItem("authToken"));
-
+      } else if (response.data.user.user_type === 'company') {
+        router.push('/Company');
       }
     } catch (error) {
       console.error(error);
@@ -40,7 +43,7 @@ const useResetLogic = () => {
   return {
     handleReset,
     setConfirmPassword,
-    setPassword
-  }
-}
-export default  useResetLogic;
+    setPassword,
+  };
+};
+export default useResetLogic;
