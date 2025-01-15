@@ -1,22 +1,22 @@
-import { colors } from "@/colors/colors";
-import { base } from "@/style/base";
-import { StyleSheet } from "react-native";
+import { colors } from '@/colors/colors';
+import { base } from '@/style/base';
+import { StyleSheet } from 'react-native';
 
 export const style = StyleSheet.create({
   productContainer: {
-    backgroundColor: colors.rose,
-    marginBottom: 10,
-    width: "45%",
-    padding: 7,
-    ...base.borderRadius
+    backgroundColor: colors.secondary,
+    width: '47%',
+    padding: 10,
+    minHeight: 300,
+    ...base.borderRadius,
   },
   productImage: {
-    width: "100%",
+    width: '100%',
     aspectRatio: 1,
   },
   logo: {
     width: 24,
     height: 24,
-    borderRadius: 40
-  }
-})
+    borderRadius: 40,
+  },
+});
