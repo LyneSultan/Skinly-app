@@ -1,34 +1,34 @@
+import { colors } from "@/colors/colors";
 import { base } from "@/style/base";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-const AdvertisementCard = () => {
+const AdvertisementCard = ({ count }: { count: { productsCount: number } }) => {
   return (
     <View style={[base.flex, base.row, styles.card]}>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}><Text style={{ fontSize: 40 }}>{count}</Text> products available in Skinly </Text>
+      </View>
       <Image
-        source={{
-          uri: 'https://cdn.shopify.com/s/files/1/2488/5102/products/avene-cleanance-cleansing-gel-400ml_2_1_580x.jpg?v=1709109161'
-        }}
+        source={require('@/assets/images/products.png')}
         style={styles.image}
       />
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>Find The Right Cream for Your Skin </Text>
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
-    borderRadius: 8,
-    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 20,
+    backgroundColor: colors.primary,
     shadowColor: '#000',
     elevation: 5,
+    minHeight: 120,
     maxWidth: "100%",
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     borderRadius: 8,
   },
   textContainer: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#ffff',
   },
 });
 

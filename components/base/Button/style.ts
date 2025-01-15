@@ -6,6 +6,6 @@ export const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.secondary,
     ...base.borderRadius,
-    width:'100%'
+    width: '100%',
   },
 });
