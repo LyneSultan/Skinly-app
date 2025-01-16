@@ -3,7 +3,9 @@ import ButtonComponent from "@/components/base/Button"
 import { Input } from "@/components/base/Input"
 import { base } from "@/style/base"
 import { typography } from "@/style/typography"
+import { Checkbox } from 'expo-checkbox'; // Import expo-checkbox
 import { Link } from "expo-router"
+import { useState } from "react"
 import { Image, Text, View } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { style } from "./style"
@@ -14,16 +16,17 @@ const Register = () => {
   const { setEmail, setName, setPassword, setPasswordConfirmation, handleRegister, errorMessages, nameError,
     emailError,passwordError,passwordConfirmationError
   } = useRegisterLogic();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-        <KeyboardAwareScrollView style={{ backgroundColor: colors.background }}>
+  <KeyboardAwareScrollView style={{ backgroundColor: colors.background }}>
 
     <View >
 
       <View style={[, base.flex, base.alignCenter, base.default,]}>
 
         <View style={[style.container]}>
-          <View style={[base.alignCenter, base.flex, base.column, base.gap]}>
+          <View style={[base.alignCenter, base.flex, base.row, base.gap]}>
             <Image source={require('@/assets/images/logo.png')} style={[style.loginImage]} />
             <Text style={[style.title]}>Skinly</Text>
           </View>
@@ -38,12 +41,19 @@ const Register = () => {
             <Input label="Email" text="Enter Your Email" onChangeText={(value) => setEmail(value)} />
             {emailError && <Text style={style.error}>{emailError}</Text>}
 
-            <Input label="Password" text="Enter Your Password" password={true} onChangeText={(value) => setPassword(value)} />
+            <Input label="Password" text="Enter Your Password" password={!showPassword} onChangeText={(value) => setPassword(value)} />
             {passwordError && <Text style={style.error}>{passwordError}</Text>}
 
-            <Input label="Confirm password" text="Enter Your Password Again" onChangeText={(value) => setPasswordConfirmation(value)} />
+            <Input label="Confirm password" text="Enter Your Password Again" password={!showPassword} onChangeText={(value) => setPasswordConfirmation(value)} />
             {passwordConfirmationError && <Text style={style.error}>{passwordConfirmationError}</Text>}
 
+            <View style={style.checkboxContainer}>
+                <Checkbox
+                  value={showPassword}
+                  onValueChange={() => setShowPassword(!showPassword)}
+                />
+              <Text style={style.showPasswordText}>Show Password</Text>
+              </View>
           </View>
 
           {errorMessages.length > 0 && (
@@ -62,11 +72,10 @@ const Register = () => {
             <Text>Already have an account?  <Link href={"/Login"}><Text style={[style.register, typography.bold]}>Login</Text> </Link> </Text>
           </View>
 
-
         </View>
       </View>
-      </View>
-      </KeyboardAwareScrollView>
+    </View>
+  </KeyboardAwareScrollView>
 
   )
 }
