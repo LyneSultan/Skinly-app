@@ -12,7 +12,9 @@ export const style = StyleSheet.create({
     padding: 15,
     gap: 15
   },
-
+  response: {
+    marginVertical: 10,
+  },
   title: {
     fontSize: 18,
     fontWeight: '600',
