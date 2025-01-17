@@ -18,7 +18,7 @@ export const useProductLogic = () => {
     const fetchProductDetails = async () => {
       try {
         const details = await getProduct(searchQuery || name);
-        
+
         setProductDetails(details.bestMatches);
         setSimilarProducts(details.similarProducts);
       } catch (error) {
@@ -37,6 +37,7 @@ export const useProductLogic = () => {
       }
 
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       console.error("Failed to fetch product:", error);

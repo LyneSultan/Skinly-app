@@ -18,9 +18,9 @@ const ProductSearch = () => {
             onChangeText={(text) => setSearchQuery(text)} style={style.searchBar} />
 
           {!productDetails ? (
-            <View style={[base.flex, base.row, { height: '100%', width: '100%' }]}>
-              <View style={[base.alignCenter, base.justifyCenter, { height: '100%', width: '100%' }]}>
-                <Image source={require('@/assets/images/notFound.png')} style={{ width: 250, height: 250 }} />
+            <View style={[base.flex, base.row]}>
+              <View style={[style.notFoundCard, base.alignCenter, base.justifyCenter]}>
+                <Image source={require('@/assets/images/notFound.png')} style={style.notFoundImage} />
                 <Text style={style.notFoundText}>No products found</Text>
               </View>
             </View>
