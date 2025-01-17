@@ -11,18 +11,21 @@ const Profile = () => {
   const { handleChange, handleEditToggle, handleLogOut, isEditing, formData } = useProfileLogic();
 
   return (
-    <View style={{ backgroundColor: colors.background }}>
+    <View style={{ backgroundColor: colors.primary }}>
       <View style={[base.default, base.flex]}>
         <View style={[style.container, base.alignCenter, base.justifyCenter]}>
 
-          <View style={[base.alignCenter, { marginBottom: 20 }]}>
-            <Image
-              source={{ uri: "https://static.vecteezy.com/system/resources/previews/021/548/095/non_2x/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg" }} // Placeholder image URL
-              style={[style.profileImage]} />
-            <Text style={style.title}>Change profile image</Text>
-          </View>
+
 
           <View style={style.card}>
+
+            <View style={[base.alignCenter, { marginBottom: 20 }]}>
+              <Image
+                source={{ uri: "https://static.vecteezy.com/system/resources/previews/021/548/095/non_2x/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg" }} // Placeholder image URL
+                style={[style.profileImage]} />
+              <Text style={style.title}>Change profile image</Text>
+            </View>
+
             <View style={[base.flex, base.row, base.spaceBetween]}>
               <Text style={style.title}>Personal Details</Text>
               <TouchableOpacity onPress={handleEditToggle}>
@@ -45,7 +48,7 @@ const Profile = () => {
               />
               <ProfileField
                 label="Password"
-                value={formData.skinType}
+                value={formData.password}
               />
 
               <ButtonComponent text="Log out" mode="outlined" onPress={handleLogOut} />
