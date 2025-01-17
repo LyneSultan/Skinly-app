@@ -12,7 +12,7 @@ export const useProfileLogic = () => {
   const [formData, setFormData] = useState({
     firstName: user.name,
     email: user.email,
-    skinType: '******',
+    password: '******',
   });
 
   const handleEditToggle = async () => {
@@ -35,7 +35,6 @@ export const useProfileLogic = () => {
           {
             name: formData.firstName,
             email: formData.email,
-            skinType: formData.skinType,
           },
           {
             headers: {

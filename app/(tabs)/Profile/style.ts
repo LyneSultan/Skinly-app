@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 export const style = StyleSheet.create({
   container: {
     flex: 0.8,
-    backgroundColor: colors.background,
   },
   card: {
     width: '100%',
@@ -17,7 +16,7 @@ export const style = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
-    elevation: 2,
+    elevation: 5,
 
   },
   profileImage:{
