@@ -4,13 +4,13 @@ import { StyleSheet } from 'react-native';
 
 export const style = StyleSheet.create({
   productContainer: {
-    backgroundColor: colors.rose,
+    backgroundColor:colors.primary,
     width: '47%',
     padding: 10,
     position: 'relative',
     minHeight: 300,
     borderWidth: 3, // Optional for clean look
-    borderColor: '#ddd',
+    borderColor: colors.background,
     ...base.borderRadius,
   },
   productImage: {
@@ -23,6 +23,7 @@ export const style = StyleSheet.create({
     borderRadius: 40,
   },
   productName: {
+    color:colors.background,
     marginBottom: 15,
     lineHeight: 20
   },
@@ -30,15 +31,15 @@ export const style = StyleSheet.create({
   arrowContainer: {
     position: 'absolute', // Places the arrow outside the card
     top: -20, // Adjust this to move the arrow above the card
-    right: -28, // Adjust this to align the arrow with the card's edge
+    right: -33, // Adjust this to align the arrow with the card's edge
     backgroundColor: colors.background, // Circle background
     borderRadius: 15,
     padding: 3,
     width: 55,
-    borderTopColor:'#ddd', // Top border color
+    borderTopColor:colors.background, // Top border color
     borderTopWidth: 3,
-    borderLeftWidth: 3, // Ensure other borders are invisible
-    borderLeftColor: '#ddd', // Top border color
+    borderLeftWidth: 3,
+    borderLeftColor: colors.background, // Top border color
 
     height: 55,
     justifyContent: 'center',

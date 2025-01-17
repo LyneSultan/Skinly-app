@@ -29,31 +29,26 @@ const ProductCard = ({ product, company, onLinkPress }: ProductCardProps) => (
         <Image source={{ uri: company?.logo || 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png' }} style={[style.logo, base.borderRadius]} />
       </View>
       <View>
-        <Text>{company.name}</Text>
+        <Text style={{ color: colors.background }}>{company.name}</Text>
       </View>
     </View>
 
     <Text
       numberOfLines={3}
       ellipsizeMode="tail"
-      style={[style.productName]} >
+      style={[style.productName,]} >
       {product.name}
     </Text>
 
     <View style={[base.flex, base.row, base.spaceBetween, base.wrap, base.maxWidth]}>
       <View>
-        <Text>{product.price.split(' ')[0]}</Text>
+        <Text style={{ color: colors.background }}>{product.price.split(' ')[0]}</Text>
       </View>
-      {/* <TouchableOpacity
-        onPress={() => onLinkPress(product.link)}
-        style={[base.alignCenter,]}
-      >
-        <Icon name="external-link" size={22} />
-      </TouchableOpacity> */}
+
       <View style={style.arrowContainer}>
-        <View style={{ backgroundColor: colors.rose, borderRadius: 30 }}>
-          <TouchableOpacity onPress={() => onLinkPress(product.link)} style={[base.alignCenter, style.arrowIcon]} >
-            <Icon name="arrow-up-right" size={24} />
+        <View style={{ backgroundColor: colors.primary, borderRadius: 30 }}>
+          <TouchableOpacity onPress={() => onLinkPress(product.link)} style={[base.alignCenter, style.arrowIcon,]} >
+            <Icon name="arrow-up-right" size={24} color={colors.background} />
           </TouchableOpacity>
         </View>
       </View>
