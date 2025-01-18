@@ -9,8 +9,8 @@ export const style = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.primary,
+    // borderWidth: 1,
+    // borderColor: colors.primary,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -20,8 +20,8 @@ export const style = StyleSheet.create({
 
   },
   profileImage:{
-  width: 100,
-    height: 100,
+  width: 70,
+    height: 70,
     borderRadius: 50,
     marginBottom: 16,
     borderWidth: 2,
