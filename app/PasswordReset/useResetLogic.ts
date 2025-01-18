@@ -9,6 +9,8 @@ const useResetLogic = () => {
   const { email } = useLocalSearchParams<{ email: string }>();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
   const { setUser } = useContext(AppContext);
 
@@ -43,6 +45,8 @@ const useResetLogic = () => {
   return {
     handleReset,
     setConfirmPassword,
+    showPassword,
+    setShowPassword,
     setPassword,
   };
 };

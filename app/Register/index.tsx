@@ -14,68 +14,69 @@ import { useRegisterLogic } from "./useRegisterLogic"
 const Register = () => {
 
   const { setEmail, setName, setPassword, setPasswordConfirmation, handleRegister, errorMessages, nameError,
-    emailError,passwordError,passwordConfirmationError
+    emailError, passwordError, passwordConfirmationError
   } = useRegisterLogic();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-  <KeyboardAwareScrollView style={{ backgroundColor: colors.background }}>
+    <KeyboardAwareScrollView style={{ backgroundColor: colors.background }}>
 
-    <View >
+      <View >
 
-      <View style={[, base.flex, base.alignCenter, base.default,]}>
+        <View style={[, base.flex, base.alignCenter, base.default,]}>
 
-        <View style={[style.container]}>
-          <View style={[base.alignCenter, base.flex, base.row, base.gap]}>
-            <Image source={require('@/assets/images/logo.png')} style={[style.loginImage]} />
-            <Text style={[style.title]}>Skinly</Text>
-          </View>
-          <View>
-            <Text style={typography.h1}>Hello! Register to get started</Text>
-          </View>
+          <View style={[style.container]}>
+            <View style={[base.alignCenter, base.flex, base.row, base.gap]}>
+              <Image source={require('@/assets/images/logo.png')} style={[style.loginImage]} />
+              <Text style={[style.title]}>Skinly</Text>
+            </View>
+            <View>
+              <Text style={typography.h1}>Hello! Register to get started</Text>
+            </View>
 
-          <View style={style.registerForm}>
-            <Input label="Name" text="Enter Your Name" onChangeText={(value) => setName(value)} />
-            {nameError && <Text style={style.error}>{nameError}</Text>}
+            <View style={style.registerForm}>
+              <Input label="Name" text="Enter Your Name" onChangeText={(value) => setName(value)} />
+              {nameError && <Text style={style.error}>{nameError}</Text>}
 
-            <Input label="Email" text="Enter Your Email" onChangeText={(value) => setEmail(value)} />
-            {emailError && <Text style={style.error}>{emailError}</Text>}
+              <Input label="Email" text="Enter Your Email" onChangeText={(value) => setEmail(value)} />
+              {emailError && <Text style={style.error}>{emailError}</Text>}
 
-            <Input label="Password" text="Enter Your Password" password={!showPassword} onChangeText={(value) => setPassword(value)} />
-            {passwordError && <Text style={style.error}>{passwordError}</Text>}
+              <Input label="Password" text="Enter Your Password" password={!showPassword} onChangeText={(value) => setPassword(value)} />
+              {passwordError && <Text style={style.error}>{passwordError}</Text>}
 
-            <Input label="Confirm password" text="Enter Your Password Again" password={!showPassword} onChangeText={(value) => setPasswordConfirmation(value)} />
-            {passwordConfirmationError && <Text style={style.error}>{passwordConfirmationError}</Text>}
+              <Input label="Confirm password" text="Enter Your Password Again" password={!showPassword} onChangeText={(value) => setPasswordConfirmation(value)} />
+              {passwordConfirmationError && <Text style={style.error}>{passwordConfirmationError}</Text>}
 
-            <View style={style.checkboxContainer}>
+              <View style={style.checkboxContainer}>
                 <Checkbox
                   value={showPassword}
                   onValueChange={() => setShowPassword(!showPassword)}
                 />
-              <Text style={style.showPasswordText}>Show Password</Text>
+                <Text style={style.showPasswordText}>Show Password</Text>
               </View>
-          </View>
 
-          {errorMessages.length > 0 && (
-            <View >
-              {errorMessages.map((msg, index) => (
-                <Text key={index} style={style.error}>
-                  * {msg}
-                </Text>
-              ))}
             </View>
-          )}
 
-          <ButtonComponent mode="contained" text="Register" onPress={handleRegister} />
+            {errorMessages.length > 0 && (
+              <View >
+                {errorMessages.map((msg, index) => (
+                  <Text key={index} style={style.error}>
+                    * {msg}
+                  </Text>
+                ))}
+              </View>
+            )}
 
-          <View style={[base.flex, base.row, base.justifyCenter]}>
-            <Text>Already have an account?  <Link href={"/Login"}><Text style={[style.register, typography.bold]}>Login</Text> </Link> </Text>
+            <ButtonComponent mode="contained" text="Register" onPress={handleRegister} />
+
+            <View style={[base.flex, base.row, base.justifyCenter]}>
+              <Text>Already have an account?  <Link href={"/Login"}><Text style={[style.register, typography.bold]}>Login</Text> </Link> </Text>
+            </View>
+
           </View>
-
         </View>
       </View>
-    </View>
-  </KeyboardAwareScrollView>
+    </KeyboardAwareScrollView>
 
   )
 }
