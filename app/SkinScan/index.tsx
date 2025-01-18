@@ -4,16 +4,16 @@ import RequirementItem from '@/components/RequirementCard';
 import { base } from '@/style/base';
 import { typography } from '@/style/typography';
 import React from 'react';
-import { Image, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { ActivityIndicator } from 'react-native-paper';
 import { style } from './style';
 import { useSkinPageLogic } from './useSkinPageLogic';
 
 const SkinScan = () => {
-  const { handlePickImage, suggestions, handleTakePicture, imageMap, apiResponse, loading } = useSkinPageLogic();
+  const { handlePickImage, error, suggestions, handleTakePicture, imageMap, apiResponse, loading } = useSkinPageLogic();
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: colors.background }}>
       <View style={[base.flex, base.default]}>
         <View style={[base.gap]}>
           <Text style={[typography.h1]}>One click away from personalized skincare insights</Text>
@@ -29,9 +29,9 @@ const SkinScan = () => {
             </View>
           </View>
 
-          <ButtonComponent text='Take picture' onPress={handleTakePicture} disabled={loading} />
+          <ButtonComponent text='Take picture' onPress={handleTakePicture} disabled={loading} backgroundColor={colors.rose} />
 
-          <ButtonComponent text='Upload picture' mode='outlined' onPress={handlePickImage} disabled={loading} />
+          <ButtonComponent text='Upload picture' mode='outlined' onPress={handlePickImage} disabled={loading} backgroundColor={colors.background} />
           {loading && (
             <ActivityIndicator size="large" color='#D16F9A' style={{ marginTop: 20 }} />
           )}
@@ -49,13 +49,14 @@ const SkinScan = () => {
                       {" " + apiResponse.class}
                     </Text>
                   </Text>
-                  <Image source={imageMap[apiResponse.class as keyof typeof imageMap]} style={style.skinTypeImage} />
+
                 </View>
               )}
+
             </>
           )}
-          {suggestions && (
-            < Text > {suggestions}</Text>
+          {error && (
+            < Text style={style.errorText}> {error}</Text>
           )}
 
         </View>

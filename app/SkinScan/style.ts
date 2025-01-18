@@ -13,11 +13,11 @@ export const style = StyleSheet.create({
     marginVertical:20,
     minHeight:250,
     backgroundColor: colors.primary,
-    padding: '8%',
+    padding:35,
     shadowColor: '#000000',
     elevation: 5,
     ...base.borderRadius,
-    gap: '15%'
+    gap: 35
   },
   errorText: {
     color: colors.error,
@@ -25,5 +25,24 @@ export const style = StyleSheet.create({
   },
   skinTypeImage: {
      width: 60, height: 60, resizeMode: 'contain'
-  }
+  },
+  suggestionBox: {
+    backgroundColor: '#ffffff',
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  reason: {
+    fontSize: 14,
+    color: '#555',
+  },
 });
