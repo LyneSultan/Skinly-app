@@ -11,14 +11,14 @@ import { useAdsLogic } from "./useAdsLogic";
 const AddvertisementPage = () => {
   const { pickImage } = PickImage();
   const { productName } = useLocalSearchParams();
-  const { handleSave, imageUri, setImageUri } = useAdsLogic();
+  const { handleSave, imageUri, setImageUri, sucess } = useAdsLogic();
 
   return (
     <View style={{ backgroundColor: colors.background }}>
 
       <View style={[base.default]}>
         <View style={[base.gap]}>
-          <Text style={[typography.h1, typography.bold]}> Create Advertisement</Text>
+          <Text style={[typography.h1, typography.bold]}>Create Advertisement</Text>
 
           <Text style={style.productName}>{productName}</Text>
 
@@ -35,7 +35,7 @@ const AddvertisementPage = () => {
             </TouchableOpacity>
 
           </View>
-          <Text style={[typography.h2]}>Preview Advertisement</Text>
+          <Text style={[typography.h2, typography.bold]}>Preview Advertisement</Text>
 
           {imageUri ? (
             <View style={base.gap}>
@@ -43,6 +43,10 @@ const AddvertisementPage = () => {
                 <Image source={{ uri: imageUri }} style={style.previewImage} />
               </View>
               <ButtonComponent text="Save" onPress={handleSave} />
+
+              {sucess && <Text>{sucess}</Text>
+
+              }
             </View>
           ) : (
             <View style={[style.previewCard, base.flex, base.row, base.alignCenter, base.spaceAround]}></View>

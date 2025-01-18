@@ -51,6 +51,7 @@ export const useOcrLogic = () => {
         name: filename,
         type: type,
       } as any);
+
       const apiUrl = process.env.EXPO_PUBLIC_API_URL;
       console.log(apiUrl);
       console.log(imageUri);
@@ -64,8 +65,9 @@ export const useOcrLogic = () => {
         body: formData,
       });
       const data = await response.json();
+      console.log(data);
       setLoading(false);
-      // console.log('API Response:', data.analysis.analysis);
+
       data.analysis?.analysis && setApiResponse(data.analysis.analysis);
     } catch (error) {
       setLoading(false);

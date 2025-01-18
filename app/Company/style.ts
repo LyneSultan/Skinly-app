@@ -16,7 +16,7 @@ export const style = StyleSheet.create({
   },
   productImage: {
     width: "100%",
-    height: 150,
+    height: 200,
   },
   paginationContainer: {
     flexDirection: 'row',

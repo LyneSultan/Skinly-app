@@ -6,6 +6,7 @@ import { useState } from "react";
 export const useAdsLogic = () => {
   const [imageUri, setImageUri] = useState<string | null>(null);
   const { productName } = useLocalSearchParams<{ productName: string }>();
+  const [sucess, setSucess] = useState('');
 
   const handleSave = async () => {
     const token = await AsyncStorage.getItem("authToken");
@@ -43,6 +44,7 @@ export const useAdsLogic = () => {
           body: formData,
         });
         console.log("Response:", response);
+        setSucess("Advertisement added");
       } catch (error: any) {
         console.error('Error uploading image:', error.message);
       }
@@ -54,5 +56,6 @@ export const useAdsLogic = () => {
     imageUri,
     handleSave,
     setImageUri,
+    sucess
   };
 };

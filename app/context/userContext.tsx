@@ -5,6 +5,7 @@ type User = {
   name: string;
   email: string;
   user_type: string;
+  profile_pircture: string
 };
 
 type AppContextType = {
