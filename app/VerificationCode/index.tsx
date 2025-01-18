@@ -2,13 +2,14 @@ import { colors } from '@/colors/colors';
 import ButtonComponent from '@/components/base/Button';
 import { base } from '@/style/base';
 import React, { useRef } from 'react';
-import { Image, Text, TextInput, View } from 'react-native';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import useForgetLogic from '../ForgetPassword/useForgetLogic';
 import { style } from './style';
 import useVerificationLogic from './useVerificationLogic';
 
 const VerificationCodePage = () => {
+
   const { inputs, handleInputChange, handleSubmit, email } = useVerificationLogic();
   const inputRefs = useRef([]);
   const { senCode } = useForgetLogic();
@@ -45,10 +46,10 @@ const VerificationCodePage = () => {
                 />
               ))}
             </View>
-            {/* <TouchableOpacity onPress={async() => senCode(email)}>
+            <TouchableOpacity onPress={async () => senCode(email)}>
               <Text style={style.resendText}>Don’t receive code? Re-send</Text>
 
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
 
             <ButtonComponent text="Submit" onPress={handleSubmit} />

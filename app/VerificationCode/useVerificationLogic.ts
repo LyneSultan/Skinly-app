@@ -1,5 +1,5 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 
 const useVerificationLogic = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const useVerificationLogic = () => {
     updatedInputs[index] = value;
     setInputs(updatedInputs);
     console.log(updatedInputs.join(''));
-    console.log("here");
+    console.log('here');
   };
 
   const handleSubmit = () => {
@@ -24,16 +24,15 @@ const useVerificationLogic = () => {
     console.log(`Verification Code: ${verificationCode}`);
     if (code === verificationCode) {
       router.push(`/PasswordReset?email=${email}`);
-
-    }
-    else {
-      console.log(`verifivation${verificationCode} while code is${code}`)
+    } else {
+      console.log(`verifivation${verificationCode} while code is${code}`);
     }
   };
   return {
     inputs,
     handleInputChange,
-    handleSubmit
-  }
-}
+    handleSubmit,
+    email,
+  };
+};
 export default useVerificationLogic;
