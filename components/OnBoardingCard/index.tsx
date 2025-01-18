@@ -1,3 +1,4 @@
+import { colors } from "@/colors/colors";
 import { typography } from "@/style/typography";
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
@@ -8,7 +9,7 @@ import { cardProps } from "./useCardLogic";
 const OnboardingCard = ({ title, subtitle, path }: cardProps) => {
   const router = useRouter();
   const handlePress = () => {
-    router.push(path);
+    router.replace(path);
   };
 
   return (
@@ -16,7 +17,7 @@ const OnboardingCard = ({ title, subtitle, path }: cardProps) => {
       <Text style={[style.text, typography.h1, typography.bold]}>{title}</Text>
       <Text style={style.text}>{subtitle}</Text>
       <View>
-        <ButtonComponent text="Next" mode="contained" onPress={handlePress} />
+        <ButtonComponent text="Next" mode="contained" onPress={handlePress} backgroundColor={colors.rose} />
       </View>
     </View>
   );

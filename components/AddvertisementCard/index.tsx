@@ -6,7 +6,7 @@ const AdvertisementCard = ({ count }: { count: { productsCount: number } }) => {
   return (
     <View style={[base.flex, base.row, styles.card]}>
       <View style={styles.textContainer}>
-        <Text style={styles.text}><Text style={{ fontSize: 40 }}>{count}</Text> products available in Skinly </Text>
+        <Text style={styles.text}><Text style={styles.count}>{count}</Text> products available in Skinly </Text>
       </View>
       <Image
         source={require('@/assets/images/products.png')}
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     minHeight: 120,
     maxWidth: "100%",
   },
+  count: { fontSize: 40 },
   image: {
     width: 100,
     height: 100,

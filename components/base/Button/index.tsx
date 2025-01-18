@@ -7,22 +7,25 @@ type buttonProps = {
   text: string;
   onPress?: () => void;
   disabled?: boolean;
+  backgroundColor?: string;
 }
 
-const ButtonComponent = ({ mode = 'contained', text, onPress, disabled = false }: buttonProps) => {
+const ButtonComponent = ({ mode = 'contained', text, onPress, disabled = false, backgroundColor = colors.secondary }: buttonProps) => {
   return (
     <Button
       mode={mode}
       textColor="#000000"
       onPress={onPress}
+      labelStyle={{ fontWeight: '700' }}
       style={[
         styles.button,
         mode === 'outlined' && {
           backgroundColor: 'white',
-          borderColor: colors.secondary,
+          borderColor: colors.rose,
           borderWidth: 3,
         },
         disabled && { opacity: 0.5 },
+        backgroundColor && { backgroundColor }
 
       ]}
       disabled={disabled}
