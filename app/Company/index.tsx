@@ -1,42 +1,49 @@
 import { colors } from "@/colors/colors";
+import AdvertisementCard from "@/components/AddvertisementCard";
 import { base } from "@/style/base";
 import { typography } from "@/style/typography";
-import { Link } from "expo-router";
-import { useState } from "react";
+import { Link, useRouter } from "expo-router";
+import { useContext, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AppContext from "../context/userContext";
 import { style } from "./style";
 import { useCompanyLogic } from "./useCompanyLogic";
 
+
 const Company = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { page, nextHandle, previousHandle, data } = useCompanyLogic();
+  const [filteredData, setFilteredData] = useState([]);
+  const { page, nextHandle, previousHandle, data, count, } = useCompanyLogic();
+  const context = useContext(AppContext);
+
+  const router = useRouter();
+  const { user, setUser } = context;
 
   return (
     <ScrollView style={{ backgroundColor: colors.background }}>
-
       <View style={[base.default]}>
         <View style={[base.gap]}>
+          <Text style={[typography.h1]}>Hello, {user?.name}</Text>
           <Text style={[typography.h1]}>Promote your products to users effectively</Text>
+
+          <AdvertisementCard count={count} />
+
           <Searchbar
             value={searchQuery}
-            onChangeText={(text) => { setSearchQuery(text) }}
             placeholder="Enter the product name"
-            style={{ backgroundColor: colors.primary }} />
-
-          <Text style={typography.h2}>Products</Text>
+            style={{ backgroundColor: colors.rose }}
+          />
 
           <View>
             <View style={[base.flex, base.row, base.wrap, base.alignCenter, base.spaceAround]}>
               {data.length > 0 ? (
                 data.map((product, index) => {
                   const name = encodeURIComponent(product.name);
-                  console.log(name);
                   return (
                     <Link href={`/AddAdvertisement?productName=${name}`} style={[style.productsContainer]} key={index}>
-
-                      <View style={[style.productCard]} >
+                      <View style={[style.productCard]}>
                         <Image
                           source={{ uri: product.image }}
                           style={[style.productImage, base.borderRadius]}
@@ -45,10 +52,11 @@ const Company = () => {
                           {product.name}
                         </Text>
                       </View>
-                    </Link>)
-                }
-                )) : (
-                <Text>Loading products...</Text>
+                    </Link>
+                  );
+                })
+              ) : (
+                <Text>No products found</Text>
               )}
             </View>
 

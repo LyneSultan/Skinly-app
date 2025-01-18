@@ -3,53 +3,59 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const pageSize = 6;
+const pageSize = 12
+  ;
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export const useCompanyLogic = () => {
   const [data, setData] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const fetchedData = await fetchData(page);
         setData(fetchedData);
+        // console.log("fetchedData,",fetchedData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
     getData();
   }, [page]);
 
- const previousHandle=async () => {
+  const previousHandle = async () => {
     if (page > 1) {
       const current = page - 1;
       setPage(current);
     }
-  }
-  const nextHandle=async () => {
+  };
+  const nextHandle = async () => {
     const current = page + 1;
     setPage(current);
-  }
- const fetchData = async (page:number) => {
-   try {
-     const TOKEN=await AsyncStorage.getItem('authToken');
+  };
+  const fetchData = async (page: number) => {
+    try {
+      const TOKEN = await AsyncStorage.getItem('authToken');
 
-     const response = await axios.get(apiUrl+routes.getCompanyProducts, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      params: {
-        page,
-        pageSize,
-      },
-     });
-     return response.data.products;
+      const response = await axios.get(apiUrl + routes.getCompanyProducts, {
+        headers: {
+          Authorization: TOKEN,
+        },
+        params: {
+          page,
+          pageSize,
+        },
+      });
+      console.log('here', response.data.count);
+      setCount(response.data.count.productsCount);
+      // console.error(response.data);
 
-  } catch (error) {
-    console.error(error);
-  }
+      return response.data.products;
+    } catch (error) {
+      console.error(error);
+    }
   };
   return {
     fetchData,
@@ -58,11 +64,11 @@ export const useCompanyLogic = () => {
     setData,
     setPage,
     nextHandle,
-    previousHandle
-  }
-
-}
- type Product = {
+    count,
+    previousHandle,
+  };
+};
+type Product = {
   image: string;
   name: string;
   price: string;
