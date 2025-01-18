@@ -23,7 +23,7 @@ const useForgetLogic = () => {
       })
       const code = response.data;
       router.push(`/VerificationCode?code=${code}&&email=${email}`)
-
+      
       console.log(response.data);
       return response.data;
     } catch (error) {

@@ -6,6 +6,7 @@ import { typography } from "@/style/typography";
 import { useState } from "react";
 import { Image, Keyboard, Text, TouchableWithoutFeedback, View } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { style } from "./style";
 import useForgetLogic from "./useForgetLogic";
 
 const ForgetPassword = () => {
@@ -21,7 +22,7 @@ const ForgetPassword = () => {
             <View style={[base.flex, base.column, base.gap]}>
 
               <View style={base.alignCenter}>
-                <Image source={require('@/assets/images/forgetPassword.png')} style={{ width: "90%", height: 300 }} />
+                <Image source={require('@/assets/images/forgetPassword.png')} style={style.forgetImage} />
               </View>
 
               <View style={[base.gap]}>
@@ -31,7 +32,7 @@ const ForgetPassword = () => {
                 {error && (
                   <Text style={{ color: colors.error }}>{error}</Text>
                 )}
-                <ButtonComponent text="Contine" onPress={() => senCode(email)} />
+                <ButtonComponent text="Continue" onPress={() => senCode(email)} />
               </View>
 
             </View>
