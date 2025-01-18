@@ -32,21 +32,21 @@ export const useRegisterLogic = () => {
 
     if (!name) {
       console.log('not name');
-      setNameError('Name is required');
+      setNameError(' * Name is required');
       return;
     } else {
       setNameError('');
     }
 
     if (!email) {
-      setEmailError('Email is required');
+      setEmailError(' * Email is required');
       return;
     } else {
       setEmailError('');
     }
 
     if (!password) {
-      setPasswordError('Password is required');
+      setPasswordError(' * Password is required');
       return;
     } else {
       setPasswordError('');
@@ -58,27 +58,25 @@ export const useRegisterLogic = () => {
     } else {
       setPasswordConfirmationError('');
     }
+    try {
+      const response = await axios.post(apiUrl + routes.register, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const token = response.data.access_token;
 
-    if (nameError)
-      try {
-        const response = await axios.post(apiUrl + routes.register, payload, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const token = response.data.access_token;
+      await AsyncStorage.setItem('authToken', token);
+      console.log(response.data);
+      setUser(response.data.user);
 
-        await AsyncStorage.setItem('authToken', token);
-        console.log(response.data);
-        setUser(response.data.user);
+      const storedToken = await AsyncStorage.getItem('authToken');
+      console.log('Stored Token:', storedToken);
 
-        const storedToken = await AsyncStorage.getItem('authToken');
-        console.log('Stored Token:', storedToken);
-
-        router.push('/(tabs)/HomeScreen');
-      } catch (error: any) {
-        setErrorMessages(error.response.data.message);
-      }
+      router.push('/(tabs)/HomeScreen');
+    } catch (error: any) {
+      setErrorMessages(error.response.data.message);
+    }
   };
 
   return {
