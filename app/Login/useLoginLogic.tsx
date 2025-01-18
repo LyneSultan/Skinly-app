@@ -1,13 +1,15 @@
 import { routes } from "@/routes/server.routes";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AppContext from "./../context/userContext";
 
 export const useLoginLogic = () => {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { setUser } = useContext(AppContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,28 +29,35 @@ export const useLoginLogic = () => {
           "Content-Type": "application/json",
         },
       });
+
       const token = response.data.access_token;
 
-      await AsyncStorage.setItem('authToken', token);
+      await AsyncStorage.setItem("authToken", token);
+
       setErrorMessages([]);
       setLoading(false);
-      if (response.data.user.user_type === 'user') {
-        router.push('/(tabs)/HomeScreen')
-      } else if (response.data.user.user_type === 'company') {
-        router.push('/Company')
+
+      setUser(response.data.user);
+      console.log("data", response.data);
+
+      if (response.data.user.user_type === "user") {
+        router.replace("/(tabs)/HomeScreen");
+
+      } else if (response.data.user.user_type === "company") {
+        router.replace("/Company");
       }
 
     } catch (error: any) {
       setLoading(false);
       setErrorMessages(error.response.data.message);
-    };
-  }
+    }
+  };
 
   return {
     handleLogin,
     setEmail,
     setPassword,
     errorMessages,
-    loading
+    loading,
   };
-}
+};
