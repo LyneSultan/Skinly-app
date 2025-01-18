@@ -32,8 +32,8 @@ const Ocr = () => {
 
           </View>
           <View style={base.gap}>
-            <ButtonComponent text="Take Picture" onPress={handleTakePicture} disabled={loading} />
-            <ButtonComponent text="Upload Picture" mode="outlined" onPress={handlePickImage} disabled={loading} />
+            <ButtonComponent text="Take Picture" onPress={handleTakePicture} disabled={loading} backgroundColor={colors.rose} />
+            <ButtonComponent text="Upload Picture" mode="outlined" onPress={handlePickImage} disabled={loading} backgroundColor={colors.background} />
           </View>
 
           {loading && (
@@ -44,54 +44,40 @@ const Ocr = () => {
             <>
               <View
                 style={{
-                  alignItems: 'center', // Centers the content horizontally
-                  marginTop: 20, // Spacing from other elements
+                  alignItems: 'center',
+                  marginTop: 20,
                 }}
               >
-                {/* <Image
-                  source={require('@/assets/images/chatbot.png')} // Replace with your image path
-                  style={{
-                    width: 120,
-                    height: 100,
-                  }}
-                /> */}
 
                 <View
                   style={{
                     backgroundColor: colors.background, // Subtle background color
-                    borderRadius: 20, // Rounded corners
+                    borderRadius: 30, // Rounded corners
                     padding: 15, // Inner padding
                     borderWidth: 3, // Optional border for emphasis
                     borderColor: colors.primary, // Border color matching the theme
+                    borderBottomLeftRadius: 0,
+                    marginLeft: 40,
+                    maxWidth: '85%',
                     position: 'relative', // Enable absolute positioning of the triangle
-                    paddingBottom: 30, // Ensure space for the triangle
                   }}
                 >
                   <Text style={[typography.h2, { color: colors.primary, fontWeight: '700', textAlign: 'center' }]}>
                     {apiResponse}
                   </Text>
 
-                  {/* Triangle Image (Tail of the speech bubble) */}
-                  <Image
-                    source={require('@/assets/images/triangle.png')} // Replace with your image path
-                    style={{
-                      position: 'absolute',
-                      bottom: -40, // Move triangle slightly outside the bubble
-                      left: '70%', // Center the triangle horizontally
-                      width: 45, // Adjust size as necessary
-                      height: 50, // Adjust size as necessary
-                    }}
-                  />
+
 
                 </View>
                 <Image
                   source={require('@/assets/images/bot3.png')} // Replace with your image path
                   style={{
                     width: 180,
-                    marginRight: 110,
+                    marginRight: 190,
                     height: 200,
                   }}
                 />
+
 
               </View>
             </>
