@@ -4,7 +4,7 @@ import { base } from "@/style/base";
 import { typography } from "@/style/typography";
 import { Link } from "expo-router";
 import { useContext, useEffect } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import PagerView from 'react-native-pager-view';
 import { style } from "./style";
 import { useHomeLogic } from "./useHomeLogic";
@@ -36,13 +36,7 @@ const HomeScreen = () => {
                     {ads.map((ad, index) => {
                       const [productName, advertisement] = ad.split(': ');
                       return (
-                        //   <Link href={`/ProductSearch/${encodeURIComponent(productName)}`} >
-
-                        // <Image key={index} source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${advertisement}` }}
-                        //   style={[style.image, base.borderRadius]} />
-                        //   </Link>
-                        <TouchableOpacity key={index} onPress={() => Linking.openURL(productName).catch((err) =>
-                          console.error('Error opening URL', err))}>
+                        <TouchableOpacity key={index} onPress={() => Linking.openURL(productName).catch((err) => console.error('Error opening URL', err))}>
                           <Image
                             source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${advertisement}` }}
                             style={[style.image, base.borderRadius]}
