@@ -40,6 +40,7 @@ export const style = StyleSheet.create({
     borderTopWidth: 3,
     borderLeftWidth: 3,
     borderLeftColor: colors.background, // Top border color
+    borderBottomLeftRadius: 1,
 
     height: 55,
     justifyContent: 'center',

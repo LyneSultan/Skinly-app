@@ -29,7 +29,7 @@ const ProductCard = ({ product, company, onLinkPress }: ProductCardProps) => (
         <Image source={{ uri: company?.logo || 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png' }} style={[style.logo, base.borderRadius]} />
       </View>
       <View>
-        <Text style={{ color: colors.background }}>{company.name}</Text>
+        <Text style={{ color: colors.background, fontSize: 16 }}>{company.name}</Text>
       </View>
     </View>
 
