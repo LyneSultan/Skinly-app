@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253833077879",
+    "project_id": "skinly-37955",
+    "storage_bucket": "skinly-37955.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253833077879:android:8a11b50e8d1f6529769272",
+        "android_client_info": {
+          "package_name": "com.lynesultan.Skinlyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Yl9X_o0euxtn6rk7GQ_fmhHiyt4Ae8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
