@@ -1,0 +1,70 @@
+import { colors } from "@/colors/colors"
+import ButtonComponent from "@/components/base/Button"
+import { Input } from "@/components/base/Input"
+import { base } from "@/style/base"
+import { typography } from "@/style/typography"
+import { Checkbox } from 'expo-checkbox'; // Import expo-checkbox
+import { Link } from "expo-router"
+import { useState } from "react"
+import { Image, Text, View } from "react-native"
+import { style } from "./style"
+import { useLoginLogic } from "./useLoginLogic"
+
+const Login = () => {
+  const { setEmail, setPassword, handleLogin, errorMessages, loading } = useLoginLogic();
+  const [showPassword, setShowPassword] = useState(false);
+  return (
+    <View style={{ backgroundColor: colors.background }}>
+      <View style={[base.flex, base.alignCenter, base.default]}>
+        <View style={[style.container]}>
+          <View style={[base.alignCenter, base.flex, base.row, base.gap]}>
+            <Image source={require('@/assets/images/logo.png')} style={[style.loginImage]} />
+            <Text style={[style.title]}>Skinly</Text>
+          </View>
+
+          <View>
+            <Text style={typography.h1}>Welcome back! Glad to see you, Again!</Text>
+          </View>
+
+          <View style={style.loginForm}>
+            <Input label="Email" text="Enter your email" onChangeText={(value) => setEmail(value)} />
+            <Input label="Password" text="Enter your password" password={!showPassword} onChangeText={(password) => setPassword(password)} />
+            <View style={style.checkboxContainer}>
+               <Checkbox
+                value={showPassword}
+                onValueChange={() => setShowPassword(!showPassword)}
+              />
+              <Text style={style.showPasswordText}>Show Password</Text>
+            </View>
+          </View>
+
+          <View style={base.flex}>
+            <View style={style.forgetPassword}>
+              <Link href="/ForgetPassword">
+                <Text>Forgot Password?</Text>
+              </Link>
+            </View>
+          </View>
+
+          {errorMessages.length > 0 && (
+            <View >
+              {errorMessages.map((msg, index) => (
+                <Text key={index} style={style.errorText}>
+                  * {msg}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          <ButtonComponent mode="contained" text="Login" onPress={handleLogin} disabled={loading} />
+
+
+          <View style={[base.flex, base.row, base.justifyCenter]}>
+            <Text>Don ‘t have an account? <Link href="/Register"><Text style={[style.login, typography.bold]}>Register</Text> </Link> </Text>
+          </View>
+        </View >
+      </View>
+    </View>
+  )
+}
+export default Login;

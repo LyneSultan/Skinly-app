@@ -1,0 +1,27 @@
+import { StyleSheet } from "react-native";
+
+export const style = StyleSheet.create(
+  {
+    header: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      textAlign: "center"
+    },
+    image: {
+      width: "90%", height: 300
+    },
+    inputBox: {
+      width: 50,
+      height: 50,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      textAlign: 'center',
+      fontSize: 20,
+      borderRadius: 10,
+      backgroundColor: '#f5f5f5',
+    },
+    resendText: {
+      textAlign:"center"
+    }
+  }
+)
