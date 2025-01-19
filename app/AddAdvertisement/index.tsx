@@ -44,9 +44,19 @@ const AddvertisementPage = () => {
               </View>
               <ButtonComponent text="Save" onPress={handleSave} />
 
-              {sucess && <Text>{sucess}</Text>
+              {sucess && (
+                <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                  <Text style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    borderRadius: 10,
+                  }}>
+                    {sucess}
+                  </Text>
+                </View>
+              )}
 
-              }
             </View>
           ) : (
             <View style={[style.previewCard, base.flex, base.row, base.alignCenter, base.spaceAround]}></View>

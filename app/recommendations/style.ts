@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
   },
   productContainer: {
     flexDirection: 'row',
+    alignItems:"center",
     marginVertical: 12,
     backgroundColor: colors.secondary,
     padding: 10,
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
   productImage: {
     width: 100,
     height: 100,
-    borderRadius: 8,
+    borderRadius: 20,
     marginRight: 10,
   },
   productDetails: {

@@ -44,7 +44,7 @@ export const useAdsLogic = () => {
           body: formData,
         });
         console.log("Response:", response);
-        setSucess("Advertisement added");
+        setSucess("🎉 Advertisement added successfully!");
       } catch (error: any) {
         console.error('Error uploading image:', error.message);
       }

@@ -57,6 +57,8 @@ const Profile = () => {
             <ProfileField
               label="Password"
               value={formData.password}
+              isEditing={false}
+              onChange={() => { }}
             />
 
             <ButtonComponent text="Log out" mode="outlined" onPress={handleLogOut} backgroundColor={colors.rose} />
